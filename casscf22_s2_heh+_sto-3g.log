@@ -1,0 +1,2291 @@
+************************************************************
+This is node06.cluster of cluster Pinconning.
+Date: Thu Jul 22 07:00:00 PDT 2021
+************************************************************
+ Set GAUSS_MDEF to "32GB".
+ Set GAUSS_PDEF to "12".
+ Entering Gaussian System, Link 0=gdv
+ Initial command:
+ /opt/gaussian/gdv-20180628-i14+/gdv/l1.exe "/tmp/764329.1.allnodes.q/Gau-8366.inp" -scrdir="/tmp/764329.1.allnodes.q/"
+ Default is to use a total of  12 processors:
+                               12 via shared-memory
+                                1 via Linda
+ Entering Link 1 = /opt/gaussian/gdv-20180628-i14+/gdv/l1.exe PID=      8369.
+  
+ Copyright (c) 1988-2018, Gaussian, Inc.  All Rights Reserved.
+  
+ This is the private, development version of
+ the Gaussian(R) DV system of programs. It is based on
+ the Gaussian(R) 16 system (copyright 2016, Gaussian, Inc.),
+ the Gaussian(R) 09 system (copyright 2009, Gaussian, Inc.),
+ the Gaussian(R) 03 system (copyright 2003, Gaussian, Inc.),
+ the Gaussian(R) 98 system (copyright 1998, Gaussian, Inc.),
+ the Gaussian(R) 94 system (copyright 1995, Gaussian, Inc.),
+ the Gaussian 92(TM) system (copyright 1992, Gaussian, Inc.),
+ the Gaussian 90(TM) system (copyright 1990, Gaussian, Inc.),
+ the Gaussian 88(TM) system (copyright 1988, Gaussian, Inc.),
+ the Gaussian 86(TM) system (copyright 1986, Carnegie Mellon
+ University), and the Gaussian 82(TM) system (copyright 1983,
+ Carnegie Mellon University). Gaussian is a federally registered
+ trademark of Gaussian, Inc.
+  
+ This software contains proprietary and confidential information,
+ including trade secrets, belonging to Gaussian, Inc.
+  
+ This software is provided under written license and may be
+ used, copied, transmitted, or stored only in accord with that
+ written license.
+  
+ The following legend is applicable only to US Government
+ contracts under FAR:
+  
+                    RESTRICTED RIGHTS LEGEND
+  
+ Use, reproduction and disclosure by the US Government is
+ subject to restrictions as set forth in subparagraphs (a)
+ and (c) of the Commercial Computer Software - Restricted
+ Rights clause in FAR 52.227-19.
+  
+ Gaussian, Inc.
+ 340 Quinnipiac St., Bldg. 40, Wallingford CT 06492
+  
+  
+ ---------------------------------------------------------------
+ Warning -- This program may not be used in any manner that
+ competes with the business of Gaussian, Inc. or will provide
+ assistance to any competitor of Gaussian, Inc.  The licensee
+ of this program is prohibited from giving any competitor of
+ Gaussian, Inc. access to this program.  By using this program,
+ the user acknowledges that Gaussian, Inc. is engaged in the
+ business of creating and licensing software in the field of
+ computational chemistry and represents and warrants to the
+ licensee that it is not a competitor of Gaussian, Inc. and that
+ it will not use this program in any manner prohibited above.
+ ---------------------------------------------------------------
+  
+
+ Cite this work as:
+ Gaussian Development Version, Revision I.14+,
+ M. J. Frisch, G. W. Trucks, H. B. Schlegel, G. E. Scuseria, 
+ M. A. Robb, J. R. Cheeseman, G. Scalmani, V. Barone, 
+ G. A. Petersson, H. Nakatsuji, X. Li, M. Caricato, A. V. Marenich, 
+ J. Bloino, B. G. Janesko, R. Gomperts, B. Mennucci, H. P. Hratchian, 
+ J. V. Ortiz, A. F. Izmaylov, J. L. Sonnenberg, D. Williams-Young, 
+ F. Ding, F. Lipparini, F. Egidi, J. Goings, B. Peng, A. Petrone, 
+ T. Henderson, D. Ranasinghe, V. G. Zakrzewski, J. Gao, N. Rega, 
+ G. Zheng, W. Liang, M. Hada, M. Ehara, K. Toyota, R. Fukuda, 
+ J. Hasegawa, M. Ishida, T. Nakajima, Y. Honda, O. Kitao, H. Nakai, 
+ T. Vreven, K. Throssell, J. A. Montgomery, Jr., J. E. Peralta, 
+ F. Ogliaro, M. J. Bearpark, J. J. Heyd, E. N. Brothers, K. N. Kudin, 
+ V. N. Staroverov, T. A. Keith, R. Kobayashi, J. Normand, 
+ K. Raghavachari, A. P. Rendell, J. C. Burant, S. S. Iyengar, 
+ J. Tomasi, M. Cossi, J. M. Millam, M. Klene, C. Adamo, R. Cammi, 
+ J. W. Ochterski, R. L. Martin, K. Morokuma, O. Farkas, 
+ J. B. Foresman, and D. J. Fox, Gaussian, Inc., Wallingford CT, 2018.
+ 
+ *******************************************
+ Gaussian DV:  ES64L-GDVRevI.14+ 23-Jun-2018
+                 22-Jul-2021 
+ *******************************************
+ %chk=casscf22_s2_heh+_sto-3g.chk
+ %subst l510 /home/kranka/proj_isborn/gdv_links_KR/gdvi14+/l510
+ ----------------------------------------------------------------------
+ #P CASSCF(2,2,fulldiag,NRoot=4,SaveGEDensities)/sto-3g scf(tight,maxcy
+ c=100) nosymm scf(tight,maxcyc=1500,conventional) iop(3/33=6) extralin
+ ks(l316,l308) noraff symm=noint iop(3/33=3) pop(full) iop(6/8=1,3/33=3
+ ,3/36=1,4/33=3,5/33=3,6/33=3,9/33=3,5/72=-3)
+ ----------------------------------------------------------------------
+ 1/38=1,172=1/1;
+ 2/12=2,15=1,17=6,18=5,40=1/2;
+ 3/6=3,25=20,28=1,33=3,36=1,116=101/1,2,3,20,16,8;
+ 4/17=2,18=2,21=10,33=3,43=1/1,5;
+ 5/5=1,7=1500,17=1000000,28=4,29=1,32=4,33=3,72=-3/10;
+ 6/7=3,8=1,28=1,33=3/1;
+ 99/5=1,9=1/99;
+ Leave Link    1 at Thu Jul 22 07:00:00 2021, MaxMem=           0 cpu:               1.9 elap:               0.2
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l101.exe)
+ ----------------------------------------------------------------------
+ CAS(2,2)SCF/STO-3G, S2 state single point, pert. calc. (all density ma
+ trices printed)
+ ----------------------------------------------------------------------
+ Symbolic Z-matrix:
+ Charge =  1 Multiplicity = 1
+ H                     0.        0.       -0.386 
+ He                    0.        0.        0.386 
+ 
+ ITRead=  0  0
+ MicOpt= -1 -1
+ NAtoms=      2 NQM=        2 NQMF=       0 NMMI=      0 NMMIF=      0
+                NMic=       0 NMicF=      0.
+                    Isotopes and Nuclear Properties:
+ (Nuclear quadrupole moments (NQMom) in fm**2, nuclear magnetic moments (NMagM)
+  in nuclear magnetons)
+
+  Atom         1           2
+ IAtWgt=           1           4
+ AtmWgt=   1.0078250   4.0026033
+ NucSpn=           1           0
+ AtZEff=  -0.0000000  -0.0000000
+ NQMom=    0.0000000   0.0000000
+ NMagM=    2.7928460   0.0000000
+ AtZNuc=   1.0000000   2.0000000
+ Leave Link  101 at Thu Jul 22 07:00:00 2021, MaxMem=  4294967296 cpu:               1.3 elap:               0.1
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l202.exe)
+                          Input orientation:                          
+ ---------------------------------------------------------------------
+ Center     Atomic      Atomic             Coordinates (Angstroms)
+ Number     Number       Type             X           Y           Z
+ ---------------------------------------------------------------------
+      1          1           0        0.000000    0.000000   -0.386000
+      2          2           0        0.000000    0.000000    0.386000
+ ---------------------------------------------------------------------
+ Symmetry turned off by external request.
+ Stoichiometry    HHe(1+)
+ Framework group  C*V[C*(HHe)]
+ Deg. of freedom     1
+ Full point group                 C*V     NOp   4
+ Rotational constants (GHZ):           0.0000000        1053.2458648        1053.2458648
+ Leave Link  202 at Thu Jul 22 07:00:00 2021, MaxMem=  4294967296 cpu:               0.1 elap:               0.0
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l301.exe)
+ Standard basis: STO-3G (5D, 7F)
+                         Coordinates in L301:                         
+ ---------------------------------------------------------------------
+ Center     Atomic      Atomic             Coordinates (Angstroms)
+ Number     Number       Type             X           Y           Z
+ ---------------------------------------------------------------------
+      1          1           0        0.000000    0.000000   -0.386000
+      2          2           0        0.000000    0.000000    0.386000
+ ---------------------------------------------------------------------
+ FixB: optimizing general contractions.
+ Ernie: Thresh=  0.10000D-02 Tol=  0.10000D-05 Strict=F.
+ IA=     1 ShT= 0 ShC= 0 NL=   1 NS=   0.
+         I=   1 JX=   3 NP=   0
+ IA=     1 L=0 SC=0 ISt=    0 NBk=    0 NP=    0 IndPr=    0.
+ IA=     2 ShT= 0 ShC= 0 NL=   1 NS=   0.
+         I=   1 JX=   3 NP=   0
+ IA=     2 L=0 SC=0 ISt=    0 NBk=    0 NP=    0 IndPr=    0.
+ Electric field displacement of shell     1 is  0.00D+00
+ Electric field displacement of shell     2 is  0.00D+00
+ LdAtmC:  AtmChg=     1.000000     2.000000
+ AtZEff=     -1.0000000     -2.0000000
+     2 basis functions,     6 primitive gaussians,     2 cartesian basis functions
+     1 alpha electrons        1 beta electrons
+       nuclear repulsion energy         1.3709254169 Hartrees.
+ IS=     1 IAt=     1 ISR=     1 T=0 IP=      1 IndIP=      1 IndIPD=      0 C=  2.769344D-01  0.000000D+00                             NZ=T
+ IS=     1 IAt=     1 ISR=     1 T=0 IP=      2 IndIP=      2 IndIPD=      1 C=  2.678389D-01  0.000000D+00                             NZ=T
+ IS=     1 IAt=     1 ISR=     1 T=0 IP=      3 IndIP=      3 IndIPD=      2 C=  8.347367D-02  0.000000D+00                             NZ=T
+ IS=     2 IAt=     2 ISR=     1 T=0 IP=      1 IndIP=      4 IndIPD=      0 C=  4.406303D-01  0.000000D+00                             NZ=T
+ IS=     2 IAt=     2 ISR=     1 T=0 IP=      2 IndIP=      5 IndIPD=      1 C=  4.261584D-01  0.000000D+00                             NZ=T
+ IS=     2 IAt=     2 ISR=     1 T=0 IP=      3 IndIP=      6 IndIPD=      2 C=  1.328150D-01  0.000000D+00                             NZ=T
+ IExCor=    0 DFT=F Ex=HF Corr=None ExCW=0 ScaHFX=  1.000000
+ ScaDFX=  1.000000  1.000000  1.000000  1.000000
+ IRadAn=      5 IRanWt=     -1 IRanGd=            0 ICorTp=0 IEmpDi=  4
+ NAtoms=    2 NActive=    2 NUniq=    2 SFac= 1.00D+00 NAtFMM=   60 NAOKFM=F Big=F
+ Integral buffers will be    131072 words long.
+ Regular integral format.
+ Two-electron integral symmetry is turned off.
+ Pair potential:
+ Leave Link  301 at Thu Jul 22 07:00:00 2021, MaxMem=  4294967296 cpu:               0.9 elap:               0.1
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l302.exe)
+ GetPMM: IRwPM=  824 LRwPM=    0 LPMAll=    2
+ GetPCM: File not found, return IValue=0.
+ NPDir=0 NMtPBC=     1 NCelOv=     1 NCel=       1 NClECP=     1 NCelD=      1
+         NCelK=      1 NCelE2=     1 NClLst=     1 CellRange=     0.0.
+ One-electron integrals computed using PRISM.
+ Entering OneElI...
+ OneElI was handed  4294967253 working-precision words.
+ Calculate overlap and kinetic energy integrals
+    NBasis =   2  MinDer = 0  MaxDer = 0
+ Requested accuracy = 0.1000D-12
+ ShPair: Thresh= 1.00D-13 NBox=     0 BxSize= 0.00D+00 RnKept= 1.46D+00
+         NSMCal=                    3 NSMKep=                   3
+ PrmmSu-InSpLW:  IPartL=    0 NPrtUS=   12 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=   11 NThAct=   12.
+ PrSmSu:  IncTry=   512 NBBP=              3 NTPThr=   100 NPartT=   12 Incr=           1 LDynOK=F GPUOK=F.
+ PrsmSu:  NPrtUS=  12 ThrOK=T IAlg=1 LenDen=           0 ISkipM=0 DoSpLW=F IThBeg=    0 IThEnd=   11.
+ Prism:   IPart=     0 DynPar=F LinDyn=F Incr=           1.
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ PRISM was handed   357913132 working-precision words and     3 shell-pairs
+ IPart=  6 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart= 11 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart= 10 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   12.
+ PrsmSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   11.
+ PrsmSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   10.
+ IPart=  9 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    9.
+ IPart=  4 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart=  2 NShTot=           1 NBatch=           1 AvBLen=         1.0
+ PrsmSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    8.
+ PrsmSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart=  8 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    6.
+ IPart=  7 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart=  3 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    5.
+ IPart=  5 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    4.
+ PrsmSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    3.
+ IPart=  0 NShTot=           1 NBatch=           1 AvBLen=         1.0
+ PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    2.
+ IPart=  1 NShTot=           1 NBatch=           1 AvBLen=         1.0
+ PrsmSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    1.
+ PrSmSu:  NxtVal=             13.
+ *** Overlap *** 
+                1             2 
+      1  0.100000D+01
+      2  0.538415D+00  0.100000D+01
+ *** Kinetic Energy *** 
+                1             2 
+      1  0.760032D+00
+      2  0.198999D+00  0.141176D+01
+ Entering OneElI...
+ OneElI was handed  4294967253 working-precision words.
+ Calculate potential energy integrals
+    NBasis =   2  MinDer = 0  MaxDer = 0
+ Requested accuracy = 0.1000D-12
+ ShPair: Thresh= 1.00D-13 NBox=     0 BxSize= 0.00D+00 RnKept= 1.46D+00
+         NSMCal=                    3 NSMKep=                   3
+ PrmmSu-InSpLW:  IPartL=    0 NPrtUS=   12 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=   11 NThAct=   12.
+ PrSmSu:  IncTry=   512 NBBP=              6 NTPThr=   100 NPartT=   12 Incr=           1 LDynOK=F GPUOK=F.
+ PrsmSu:  NPrtUS=  12 ThrOK=T IAlg=1 LenDen=           0 ISkipM=0 DoSpLW=F IThBeg=    0 IThEnd=   11.
+ Prism:   IPart=     0 DynPar=F LinDyn=F Incr=           1.
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ PRISM was handed   357913121 working-precision words and     3 shell-pairs
+ IPart= 11 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart=  5 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   12.
+ IPart=  8 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   11.
+ PrsmSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   10.
+ IPart=  1 NShTot=           2 NBatch=           1 AvBLen=         2.0
+ PrsmSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    9.
+ IPart=  2 NShTot=           2 NBatch=           1 AvBLen=         2.0
+ PrsmSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    8.
+ IPart=  0 NShTot=           2 NBatch=           1 AvBLen=         2.0
+ PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart=  4 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    6.
+ IPart=  7 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    5.
+ IPart=  6 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ IPart=  9 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    4.
+ IPart=  3 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    3.
+ PrsmSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    2.
+ IPart= 10 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    1.
+ PrSmSu:  NxtVal=             13.
+ ***** Potential Energy ***** 
+                1             2 
+      1  0.249470D+01
+      2  0.163601D+01  0.401182D+01
+ ****** Core Hamiltonian ****** 
+                1             2 
+      1 -0.173467D+01
+      2 -0.143701D+01 -0.260005D+01
+ SSO for IR=          1
+                 1             2 
+      1   0.100000D+01  0.538415D+00
+      2   0.538415D+00  0.100000D+01
+ SVDSVc IOpt=   1 NormSV=T IR=1
+ SVDSVc V= 1.54D+00 4.62D-01
+ V for IR=          1
+                 1             2 
+      1   0.707107D+00  0.707107D+00
+      2   0.707107D+00 -0.707107D+00
+ Vt*S*V: 
+                1             2 
+      1  0.100000D+01
+      2  0.000000D+00  0.100000D+01
+ TstOVc:  Largest diagonal error= 2.22D-16 IB=1 I=    1.
+ TstOVc:  Largest same sym error= 4.44D-16 IB=1 I=    2 J=    1.
+ Orthogonalized basis functions: 
+                 1             2 
+      1   0.570096D+00  0.104078D+01
+      2   0.570096D+00 -0.104078D+01
+ NBasis=     2 RedAO= T EigKep=  4.62D-01  NBF=     2
+ NBsUse=     2 1.00D-06 EigRej= -1.00D+00 NBFU=     2
+ Leave Link  302 at Thu Jul 22 07:00:00 2021, MaxMem=  4294967296 cpu:               0.8 elap:               0.1
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l303.exe)
+ GetPCM: File not found, return IValue=0.
+ DipDrv:  MaxL=1.
+ MemDpI: Int=      800000 Cav=           0 CFW=           0 Tot=      800000
+ DipPsm:  J= 1 NJ= 4 MaxL=1 MMat= 4 MaxMat= 4.
+ DipInt: DoE/N= T F RetVal/Mat= F T Init=T NMatP=  4 IDeriv=0 Min/MaxMlt=  0  1
+ Entering OneElI...
+ OneElI was handed  4294967283 working-precision words.
+ Multipole integrals L=0 to 1 MinM= 0 MaxM= 3.
+ Requested accuracy = 0.1000D-12
+ ShPair: Thresh= 1.00D-13 NBox=     0 BxSize= 0.00D+00 RnKept= 1.46D+00
+         NSMCal=                    3 NSMKep=                   3
+ PrmmSu-InSpLW:  IPartL=    0 NPrtUS=    1 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=    0 NThAct=    1.
+ PrSmSu:  IncTry=   512 NBBP=              3 NTPThr=   100 NPartT=    1 Incr=           1 LDynOK=F GPUOK=F.
+ PrsmSu:  NPrtUS=   1 ThrOK=F IAlg=2 LenDen=           0 ISkipM=0 DoSpLW=F IThBeg=    0 IThEnd=    0.
+ Prism:   IPart=     0 DynPar=F LinDyn=F Incr=           1.
+ PRISM was handed  4294966144 working-precision words and     3 shell-pairs
+ IPart=  0 NShTot=           3 NBatch=           1 AvBLen=         3.0
+ PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=    1    1 IThBeg=    0 IThEnd=    0 CPU=   -1 GPU=   -1 NThAct=    1.
+ PrSmSu:  NxtVal=              2.
+ Multipole matrices IBuc=  518 IX=    1 IJ=           1:
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+ Multipole matrices IBuc=  518 IX=    2 IJ=           1:
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+ Multipole matrices IBuc=  518 IX=    3 IJ=           1:
+                1             2 
+      1 -0.729434D+00
+      2  0.734846D-01  0.729434D+00
+ ReDoC1: IPurDI=1 IPurFI=1 IPurDO=0 IPurFO=0.
+ Fermi contact integrals: 
+                 1             2 
+      1   0.628247D+00  0.129451D+00
+      2   0.104302D+00  0.999604D+00
+ Leave Link  303 at Thu Jul 22 07:00:01 2021, MaxMem=  4294967296 cpu:               0.3 elap:               0.0
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l320.exe)
+ GetPMM: IRwPM=  824 LRwPM=    0 LPMAll=    2
+ Enter DskPsm, NBasis=   2 NBas6D=   2 NShell=   2 IDoSP=4.
+ Out2e will use a cutoff of  1.00D-10
+ FoFCou: FMM=F IPFlag=           0 FMFlag=           0 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=       600 IOpCl=  9 I1Cent=           0 NGrid=           0
+         NMat0=    0 NMatS0=      0 NMatT0=    0 NMatD0=    0 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ FoFCou:  KetSym=F NOpSet=  1 NOpAb=1 NOp=  1.
+ FoFCou:  CnvScl= 1.00D+00 Thresh= 1.00D-13 IAcrcy=      10.
+ IniFok:  ToCart=T IDoP0=0 DoConv=F DoRafP=T DoAdj=T
+ ShPair: Thresh= 1.00D-13 NBox=     0 BxSize= 0.00D+00 RnKept= 1.46D+00
+         NSMCal=                    3 NSMKep=                   3
+ PrismS was handed  4294704271 working-precision words and     3 shell-pairs
+ FoFCou: LinMIO=F DoNuc=F BraDBF=F KetDBF=F HaveP=F PDBF=F HaveZ=F HaveW=F
+         NIJTC =       1 NIJTAt=       0 NIJTCD=       0 NIJTT =       1
+         IJTBeg=       1 IJTEnd=       1 KLTBeg=       1 KLTEnd=       1
+         IPTBeg=       1 IPTEnd=       1 IPTBCv=       1 IPTECv=       1
+         IZTBeg=       1 IZTEnd=       1 IZTBCv=       1 IZTECv=       1
+         IWTBeg=       2 IWTEnd=       1 IWTBCv=       2 IWTECv=       1
+         INTBeg=       1 INTEnd=       0 IFTBCv=       1 IFTECv=       1
+ NCel replicated for PrismC:     1
+ CoulSu-InSpLW:  IPartL=    0 NPrtUS=   12 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=   11 NThAct=   12.
+ CoulSu:  IncTry=  1024 NBBP=              6 NTPThr=   100 NPartT=   12 Incr=           1 LDynOK=F GPUOK=F.
+ CoulSu:  NPrtUS=  12 ThrOK=T IAlg=2 LenDen=           0 LWGrdD=           0 DoCopy=F ISkipM=0
+          DoSpLW=F IThBeg=    0 IThEnd=   11.
+ CoulSu:  IPart=    0 IPartR=    0 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    8 IPartR=    8 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  0 JobTyp=20 DoJE=F Cont=F.
+ CoulSu:  IPart=    1 IPartR=    1 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    7 IPartR=    7 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    6 IPartR=    6 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    2 IPartR=    2 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=     0 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ Enter PrismC:  IPart=  1 JobTyp=20 DoJE=F Cont=F.
+ Enter PrismC:  IPart=  8 JobTyp=20 DoJE=F Cont=F.
+ Enter PrismC:  IPart=  6 JobTyp=20 DoJE=F Cont=F.
+ Enter PrismC:  IPart=  7 JobTyp=20 DoJE=F Cont=F.
+ CoulSu:  IPart=   11 IPartR=   11 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=     8 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     6 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ CoulSu:  IPart=    9 IPartR=    9 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=     1 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     7 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ Enter PrismC:  IPart= 11 JobTyp=20 DoJE=F Cont=F.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ CoulSu:  IPart=   10 IPartR=   10 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    3 IPartR=    3 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=    11 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ Enter PrismC:  IPart= 10 JobTyp=20 DoJE=F Cont=F.
+ CoulSu:  IPart=    5 IPartR=    5 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    4 IPartR=    4 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  5 JobTyp=20 DoJE=F Cont=F.
+ Enter PrismC:  IPart=  3 JobTyp=20 DoJE=F Cont=F.
+ Enter PrismC:  IPart=  9 JobTyp=20 DoJE=F Cont=F.
+ PrismC:  IPart=    10 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ Enter PrismC:  IPart=  2 JobTyp=20 DoJE=F Cont=F.
+ Enter PrismC:  IPart=  4 JobTyp=20 DoJE=F Cont=F.
+ PrismC:  IPart=     5 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC:  IPart=     3 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     9 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     2 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC:  IPart=     4 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=1.
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ PrismC was handed   357891321 working-precision words and     3 shell-pairs
+ IPart=  6 NShTot=           1 NShNF=           1 NShFF=           0 MinMC=     218
+           NShCPU=           1 NBCPU=           1 AvBCPU=         1.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  0 NShTot=           1 NShNF=           1 NShFF=           0 MinMC=     218
+           NShCPU=           1 NBCPU=           1 AvBCPU=         1.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   12.
+ CoulSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   11.
+ IPart=  8 NShTot=           1 NShNF=           1 NShFF=           0 MinMC=     218
+           NShCPU=           1 NBCPU=           1 AvBCPU=         1.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  1 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     218
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   10.
+ CoulSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    9.
+ IPart=  7 NShTot=           1 NShNF=           1 NShFF=           0 MinMC=     218
+           NShCPU=           1 NBCPU=           1 AvBCPU=         1.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    8.
+ IPart= 11 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     218
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart= 10 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     218
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    6.
+ IPart=  2 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     218
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    5.
+ IPart=  5 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     218
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    4.
+ IPart=  9 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     218
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    3.
+ IPart=  3 NShTot=           1 NShNF=           1 NShFF=           0 MinMC=     218
+           NShCPU=           1 NBCPU=           1 AvBCPU=         1.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    2.
+ IPart=  4 NShTot=           1 NShNF=           1 NShFF=           0 MinMC=     218
+           NShCPU=           1 NBCPU=           1 AvBCPU=         1.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    1.
+ CoulSu:  NxtVal=             13 LenVP=      357891322 MinMC=     218.
+ IniFok:  ToCart=T IDoP0=0 DoConv=T DoRafP=F DoAdj=T
+            6 integrals produced for a total of            6.
+  END OF INTEGRAL PRINTING.
+
+ warning: entry into irel
+ Leave Link  320 at Thu Jul 22 07:00:01 2021, MaxMem=  4294967296 cpu:               0.7 elap:               0.1
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l316.exe)
+
+
+
+ *** Dumping Two-Electron integrals ***
+
+
+
+ ISMode= 0 Mode= 1 IBase=         1 IBasD=         1    131073
+ DBase=         0 DBasD=         0         0 IReset=         2    131070
+ IntCnt=         6 ITotal=         6 NWIIB=    131072 ISym2E=0
+ I=  2 J=  1 K=  2 L=  1 Int=  0.225798872626D+00
+ I=  2 J=  1 K=  1 L=  1 Int=  0.368841675601D+00
+ I=  2 J=  2 K=  2 L=  1 Int=  0.445584528614D+00
+ I=  2 J=  2 K=  2 L=  2 Int=  0.105571294007D+01
+ I=  1 J=  1 K=  1 L=  1 Int=  0.774605944194D+00
+ I=  2 J=  2 K=  1 L=  1 Int=  0.591865858118D+00
+ Leave Link  316 at Thu Jul 22 07:00:01 2021, MaxMem=  4294967296 cpu:               0.3 elap:               0.1
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l308.exe)
+ Dipole velocity integrals will be written to rwf   572.
+ Entering OneElI...
+ OneElI was handed  4294967260 working-precision words.
+ Calculate R x Del and Del integrals.
+    NBasis =     2  MinDer = 0  MaxDer = 0
+ Requested accuracy = 0.1000D-12
+ ShPair: Thresh= 1.00D-13 NBox=     0 BxSize= 0.00D+00 RnKept= 1.46D+00
+         NSMCal=                    3 NSMKep=                   3
+ PrmmSu-InSpLW:  IPartL=    0 NPrtUS=    1 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=    0 NThAct=    1.
+ PrSmSu:  IncTry=   512 NBBP=              3 NTPThr=   100 NPartT=    1 Incr=           1 LDynOK=F GPUOK=F.
+ PrsmSu:  NPrtUS=   1 ThrOK=F IAlg=2 LenDen=           0 ISkipM=0 DoSpLW=F IThBeg=    0 IThEnd=    0.
+ Prism:   IPart=     0 DynPar=F LinDyn=F Incr=           1.
+ PRISM was handed  4294966135 working-precision words and     3 shell-pairs
+ IPart=  0 NShTot=           3 NBatch=           1 AvBLen=         3.0
+ PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=    1    1 IThBeg=    0 IThEnd=    0 CPU=   -1 GPU=   -1 NThAct=    1.
+ PrSmSu:  NxtVal=              2.
+ Dipole Velocity for IMat=    1:
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+ Dipole Velocity for IMat=    2:
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+ Dipole Velocity for IMat=    3:
+                1             2 
+      1  0.000000D+00
+      2 -0.368564D+00  0.000000D+00
+ R x Del for IMat=    1:
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+ R x Del for IMat=    2:
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+ R x Del for IMat=    3:
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+< mu | del r + r del | nu > integrals: XX
+                1             2 
+      1  0.000000D+00
+      2  0.100742D+00  0.000000D+00
+< mu | del r + r del | nu > integrals: YY
+                1             2 
+      1  0.000000D+00
+      2  0.100742D+00  0.000000D+00
+< mu | del r + r del | nu > integrals: ZZ
+                1             2 
+      1  0.000000D+00
+      2  0.264103D-01  0.000000D+00
+< mu | del r + r del | nu > integrals: XY
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+< mu | del r + r del | nu > integrals: XZ
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+< mu | del r + r del | nu > integrals: YZ
+                1             2 
+      1  0.000000D+00
+      2  0.000000D+00  0.000000D+00
+ Leave Link  308 at Thu Jul 22 07:00:01 2021, MaxMem=  4294967296 cpu:               0.2 elap:               0.0
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l401.exe)
+ Initial guess wavefunction:
+ SetAtRh:  ITypeU=  14 NETotI=       2 ICharg=  1 NETot=       2.
+ StAtR1:  I=    1 I1=    1 IA=  1 C=   1.0 OKShel=T
+                                                  S
+                                                  1
+ StAtR1:  I=    2 I1=    2 IA=  2 C=   2.0 OKShel=T
+                                                  S
+                                                  2
+          I=    1 IA=  1 I1=    1 NAtG=10 NE=   1.000 C=   0.667 Err=-3.33D-01
+          I=    2 IA=  2 I1=    2 NAtG=11 NE=   2.000 C=   1.333 Err=-6.67D-01
+ ShPair: Thresh= 1.00D-12 NBox=     0 BxSize= 0.00D+00 RnKept= 1.46D+00
+         NSMCal=                    3 NSMKep=                   3
+ ReadGW:  IGet=1 IStart=           1 Next=           1 LGW=           0.
+ ExpMin= 1.69D-01 ExpMax= 6.36D+00 ExpMxC= 6.36D+00 IAcc=3 IRadAn=         5 AccDes= 0.00D+00
+ Harris functional with IExCor=  205 and IRadAn=       5 diagonalized for initial guess.
+ HarFok:  IExCor=  205 AccDes= 0.00D+00 IRadAn=         5 IDoV= 1 UseB2=F ITyADJ=14
+ ICtDFT=  3500011 ScaDFX=  1.000000  1.000000  1.000000  1.000000
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ CkSvGd:  ISavGI=        -1 IRadAn=       5 IRASav=       0 ISavGd=        -1.
+ SetAtRh:  ITypeU=  13 NETotI=       3 ICharg=  0 NETot=       3.
+ StAtR1:  I=    1 I1=    1 IA=  1 C=   1.0 OKShel=T
+                                                  S
+                                                  1
+ StAtR1:  I=    2 I1=    2 IA=  2 C=   2.0 OKShel=T
+                                                  S
+                                                  2
+          I=    1 IA=  1 I1=    1 NAtG= 9 NE=   1.000 C=   1.000 Err=-2.15D-12
+          I=    2 IA=  2 I1=    2 NAtG=10 NE=   2.000 C=   2.000 Err=-3.06D-12
+ CalDSu-InSpLW:  IPartL=    0 NPrtUS=   12 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=   11 NThAct=   12.
+ CalDSu:  NPrtUS=  12 ThrOK=T IAlg=2 DoDPD=F LenP=           3 LenD1P=             0 GPUOK=F
+          ISkipM=0 DoSpLW=F IThBeg=    0 IThEnd=   11.
+ IPart=  0 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart=  2 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart=  4 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart=  7 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  1 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ IPart= 10 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ IPart=  8 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ IPart=  2 Atom number   1 atomic number  1 has       21352 grid points.
+ IPart=  3 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ At   1 B   1: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  2 Atom   1 batch    1 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      2838
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart= 10 Atom number   1 atomic number  1 has       21352 grid points.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart=  7 Atom number   1 atomic number  1 has       21352 grid points.
+ At   1 B   5: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart= 10 Atom   1 batch    5 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ IPart=  4 Atom number   1 atomic number  1 has       21352 grid points.
+ IPart=  0 Atom number   1 atomic number  1 has       21352 grid points.
+ At   1 B   4: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  4 Atom   1 batch    4 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Symmetry reduced    86 angular points to    86 for atom    1.
+ IPart=  5 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ IPart=  6 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart=  8 Atom number   1 atomic number  1 has       21352 grid points.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  9 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ IPart=  6 Atom number   1 atomic number  1 has       21352 grid points.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ At   1 B   9: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  6 Atom   1 batch    9 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ IPart=  1 Atom number   1 atomic number  1 has       21352 grid points.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ At   1 B   6: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  1 Atom   1 batch    6 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ IPart= 11 IRanGd=          0 ScrnBf=T ScrnGd=T RCrit=4.00D+00 DoMicB=T.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ CutRad = 1000.00    CtRdIn =    0.00    XCrit =  15.00   ICut = 0
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ At   1 B   2: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  7 Atom   1 batch    2 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1552
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  5 Atom number   1 atomic number  1 has       21352 grid points.
+ IPart= 11 Atom number   1 atomic number  1 has       21352 grid points.
+ IPart=  9 Atom number   1 atomic number  1 has       21352 grid points.
+ IPart=  3 Atom number   1 atomic number  1 has       21352 grid points.
+ At   1 B  12: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart= 11 Atom   1 batch   12 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ At   1 B  11: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  9 Atom   1 batch   11 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ At   1 B   3: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  0 Atom   1 batch    3 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      2416
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ At   1 B  10: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  5 Atom   1 batch   10 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   194 angular points to   194 for atom    1.
+ Symmetry reduced   302 angular points to   302 for atom    1.
+ At   1 B   8: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  8 Atom   1 batch    8 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ At   1 B   7: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  3 Atom   1 batch    7 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ Symmetry reduced   590 angular points to   590 for atom    1.
+ At   1 B  13: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  6 Atom   1 batch   13 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    1.
+ At   1 B  14: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  8 Atom   1 batch   14 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    1.
+ At   1 B  15: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  9 Atom   1 batch   15 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ At   1 B  16: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart= 11 Atom   1 batch   16 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    1.
+ At   1 B  17: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  5 Atom   1 batch   17 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ There are no significant shells for this batch.
+ IPart=  4 Atom   1 batch   19 overlaps    2 atoms,     0 shells and     1 DB shells.   NGrid=       302
+ Symmetry reduced   302 angular points to   302 for atom    1.
+ At   1 B  18:  50.0% Sh  50.0 % Bf    1 runs, min    1 max    1 av    1.0
+ IPart= 10 Atom   1 batch   18 overlaps    2 atoms,     1 shells and     1 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    1.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Symmetry reduced   302 angular points to   302 for atom    1.
+ Symmetry reduced   302 angular points to   302 for atom    1.
+ IPart=  3 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B   1: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  3 Atom   2 batch    1 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      2838
+ Symmetry reduced    86 angular points to    86 for atom    2.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  1 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B   2: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  1 Atom   2 batch    2 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1552
+ Symmetry reduced   194 angular points to   194 for atom    2.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  4 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B   3: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  4 Atom   2 batch    3 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      2416
+ Symmetry reduced   302 angular points to   302 for atom    2.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  6 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B   4: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  6 Atom   2 batch    4 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    2.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  8 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B   5: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  8 Atom   2 batch    5 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    2.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  7 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B   6: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  7 Atom   2 batch    6 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ IPart= 10 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B   7: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart= 10 Atom   2 batch    7 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ Symmetry reduced   590 angular points to   590 for atom    2.
+ IPart=  9 Atom number   2 atomic number  2 has       22560 grid points.
+ Symmetry reduced   590 angular points to   590 for atom    2.
+ At   2 B   8: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  9 Atom   2 batch    8 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    2.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart= 11 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B   9: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart= 11 Atom   2 batch    9 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    2.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  5 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B  10: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  5 Atom   2 batch   10 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    2.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  0 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B  11: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  0 Atom   2 batch   11 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    2.
+ Pruned (  99, 590) grid will be used in numerical quadrature.
+ IPart=  2 Atom number   2 atomic number  2 has       22560 grid points.
+ At   2 B  12: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  2 Atom   2 batch   12 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=      1180
+ Symmetry reduced   590 angular points to   590 for atom    2.
+ At   2 B  13: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  1 Atom   2 batch   13 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    2.
+ At   2 B  14: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  6 Atom   2 batch   14 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    2.
+ At   2 B  15: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  7 Atom   2 batch   15 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ At   2 B  16: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  8 Atom   2 batch   16 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    2.
+ Symmetry reduced   302 angular points to   302 for atom    2.
+ At   2 B  17: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart=  9 Atom   2 batch   17 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    2.
+ At   2 B  18: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart= 11 Atom   2 batch   18 overlaps    2 atoms,     2 shells and     2 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    2.
+ At   2 B  19: 100.0% Sh 100.0 % Bf    1 runs, min    2 max    2 av    2.0
+ IPart= 10 Atom   2 batch   19 overlaps    2 atoms,     2 shells and     1 DB shells.   NGrid=       604
+ At   2 B  20:  50.0% Sh  50.0 % Bf    1 runs, min    1 max    1 av    1.0
+ IPart=  5 Atom   2 batch   20 overlaps    2 atoms,     1 shells and     1 DB shells.   NGrid=       604
+ Symmetry reduced   302 angular points to   302 for atom    2.
+ Symmetry reduced   302 angular points to   302 for atom    2.
+ There are no significant shells for this batch.
+ IPart=  1 Atom   2 batch   21 overlaps    2 atoms,     0 shells and     1 DB shells.   NGrid=       302
+ IPart=  1         3304 of         3638 points in       4 batches and       10 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   12.
+ IPart=  0         3562 of         3596 points in       2 batches and        8 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   11.
+ IPart=  6         3450 of         3568 points in       4 batches and       19 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   10.
+ IPart=  7         3294 of         3336 points in       3 batches and       13 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    9.
+ IPart=  8         3442 of         3568 points in       4 batches and       27 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    8.
+ IPart=  5         3400 of         3568 points in       4 batches and       47 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart=  9         3418 of         3568 points in       4 batches and       37 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    6.
+ IPart=  2         3968 of         4018 points in       2 batches and        9 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    5.
+ IPart= 11         3405 of         3568 points in       4 batches and       46 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    4.
+ IPart=  3         3992 of         4018 points in       2 batches and        9 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    3.
+ IPart=  4         3596 of         3898 points in       3 batches and        8 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    2.
+ IPart= 10         3472 of         3568 points in       4 batches and       45 microbatches, Max-NSigAt=       2 Max-NSgAt2=       2
+ CalDSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    1.
+ Requested info about the electron count:
+ NE=    3 NElCor=    0 El error=2.84D-10 rel=9.46D-11 Tolerance=1.00D-03
+ Shell     1     absolute error=6.25D-10              Tolerance=1.20D-02
+ Shell     2       signed error=4.17D-10              Tolerance=1.00D-01
+ SetAtRh:  ITypeU=  14 NETotI=       3 ICharg=  0 NETot=       3.
+ StAtR1:  I=    1 I1=    1 IA=  1 C=   1.0 OKShel=T
+                                                  S
+                                                  1
+ StAtR1:  I=    2 I1=    2 IA=  2 C=   2.0 OKShel=T
+                                                  S
+                                                  2
+          I=    1 IA=  1 I1=    1 NAtG=10 NE=   1.000 C=   1.000 Err=-1.35D-12
+          I=    2 IA=  2 I1=    2 NAtG=11 NE=   2.000 C=   2.000 Err=-6.03D-12
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=T BraDBF=F KetDBF=T FulRan=T
+         wScrn=  0.000000 ICntrl=       500 IOpCl=  0 I1Cent=   200000004 NGrid=           0
+         NMat0=    1 NMatS0=      1 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ FoFCou:  KetSym=T NOpSet=  1 NOpAb=1 NOp=  1.
+ FoFCou:  CnvScl= 1.00D+00 Thresh= 1.00D-12 IAcrcy=      10.
+ ShPair: Thresh= 1.00D-12 NBox=     0 BxSize= 0.00D+00 RnKept= 1.46D+00
+         NSMCal=                    3 NSMKep=                   3
+ FoFCou: LinMIO=F DoNuc=F BraDBF=F KetDBF=T HaveP=T PDBF=T HaveZ=F HaveW=F
+         NIJTC =       1 NIJTAt=       0 NIJTCD=       1 NIJTT =       2
+         IJTBeg=       1 IJTEnd=       1 KLTBeg=       2 KLTEnd=       2
+         IPTBeg=       2 IPTEnd=       2 IPTBCv=       2 IPTECv=       2
+         IZTBeg=       1 IZTEnd=       1 IZTBCv=       1 IZTECv=       1
+         IWTBeg=       2 IWTEnd=       2 IWTBCv=       2 IWTECv=       2
+         INTBeg=       1 INTEnd=       0 IFTBCv=       1 IFTECv=       1
+ Entering DenIrr
+ DenIrr was handed  4294966736 working-precision words and     5 shell-pairs
+ Leaving DenIrr, iEnd w/o den=        1749 nHerm=           5.
+ CoulSu-InSpLW:  IPartL=    0 NPrtUS=   12 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=   11 NThAct=   12.
+ CoulSu:  IncTry=  1024 NBBP=              6 NTPThr=   100 NPartT=   12 Incr=           1 LDynOK=F GPUOK=F.
+ CoulSu:  NPrtUS=  12 ThrOK=T IAlg=1 LenDen=           5 LWGrdD=           0 DoCopy=T ISkipM=0
+          DoSpLW=F IThBeg=    0 IThEnd=   11.
+ CoulSu:  IPart=    0 IPartR=    0 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    5 IPartR=    5 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    4 IPartR=    4 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    8 IPartR=    8 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    1 IPartR=    1 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    3 IPartR=    3 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    9 IPartR=    9 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    7 IPartR=    7 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  0 JobTyp=20 DoJE=T Cont=T.
+ CoulSu:  IPart=    6 IPartR=    6 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  5 JobTyp=20 DoJE=T Cont=T.
+ CoulSu:  IPart=   11 IPartR=   11 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=     0 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ CoulSu:  IPart=    2 IPartR=    2 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  9 JobTyp=20 DoJE=T Cont=T.
+ CoulSu:  IPart=   10 IPartR=   10 CPU=   -1 GPU=   -1.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     5 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC:  IPart=     9 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ Enter PrismC:  IPart=  8 JobTyp=20 DoJE=T Cont=T.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ Enter PrismC:  IPart=  1 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=     8 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart=  4 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=     1 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ Enter PrismC:  IPart=  3 JobTyp=20 DoJE=T Cont=T.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ Enter PrismC:  IPart= 11 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=     4 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart= 10 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=    11 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart=  2 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=    10 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     3 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart=  6 JobTyp=20 DoJE=T Cont=T.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ Enter PrismC:  IPart=  7 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=     2 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     6 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     7 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ PrismC was handed   357912880 working-precision words and     3 shell-pairs
+ IPart=  9 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  7 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   12.
+ IPart=  5 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   11.
+ IPart=  1 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   10.
+ CoulSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    9.
+ IPart= 11 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    8.
+ IPart=  3 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart=  8 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    6.
+ IPart=  4 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    5.
+ IPart= 10 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    4.
+ IPart=  2 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    3.
+ IPart=  6 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     200
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    2.
+ IPart=  0 NShTot=           6 NShNF=           6 NShFF=           0 MinMC=     200
+           NShCPU=           6 NBCPU=           6 AvBCPU=         1.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    1.
+ CoulSu:  NxtVal=             13 LenVP=      357912881 MinMC=     200.
+ Entering FocIrr
+ FocIrr was handed  4294964978 working-precision words and     3 shell-pairs
+ Leaving FocIrr
+ Entering DenIrr
+ DenIrr was handed  4294966736 working-precision words and     5 shell-pairs
+ Leaving DenIrr, iEnd w/o den=        1865 nHerm=          48.
+ CoulSu-InSpLW:  IPartL=    0 NPrtUS=   12 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=   11 NThAct=   12.
+ CoulSu:  IncTry=  1024 NBBP=              6 NTPThr=   100 NPartT=   12 Incr=           1 LDynOK=F GPUOK=F.
+ CoulSu:  NPrtUS=  12 ThrOK=T IAlg=1 LenDen=          48 LWGrdD=           0 DoCopy=T ISkipM=0
+          DoSpLW=F IThBeg=    0 IThEnd=   11.
+ CoulSu:  IPart=    2 IPartR=    2 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    0 IPartR=    0 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  2 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=    5 IPartR=    5 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  0 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=    6 IPartR=    6 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  5 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=    3 IPartR=    3 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=     2 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ CoulSu:  IPart=    4 IPartR=    4 CPU=   -1 GPU=   -1.
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ CoulSu:  IPart=    9 IPartR=    9 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  6 JobTyp=20 DoJE=T Cont=F.
+ Enter PrismC:  IPart=  4 JobTyp=20 DoJE=T Cont=F.
+ Enter PrismC:  IPart=  9 JobTyp=20 DoJE=T Cont=F.
+ Enter PrismC:  IPart=  3 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=    8 IPartR=    8 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    7 IPartR=    7 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  8 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=   11 IPartR=   11 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  7 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=   10 IPartR=   10 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=     5 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     8 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC:  IPart=     3 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     0 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     7 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ CoulSu:  IPart=    1 IPartR=    1 CPU=   -1 GPU=   -1.
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ Enter PrismC:  IPart= 11 JobTyp=20 DoJE=T Cont=F.
+ PrismC:  IPart=     6 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart= 10 JobTyp=20 DoJE=T Cont=F.
+ PrismC:  IPart=    11 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart=  1 JobTyp=20 DoJE=T Cont=F.
+ PrismC:  IPart=    10 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC:  IPart=     1 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     9 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ PrismC:  IPart=     4 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ PrismC was handed   357912784 working-precision words and     3 shell-pairs
+ IPart=  2 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   12.
+ IPart=  5 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   11.
+ IPart=  8 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   10.
+ IPart=  3 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    9.
+ IPart= 11 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    8.
+ IPart=  1 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart=  9 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  0 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    6.
+ CoulSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    5.
+ IPart=  7 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart= 10 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  4 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  6 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     180
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    4.
+ CoulSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    3.
+ CoulSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    2.
+ CoulSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    1.
+ CoulSu:  NxtVal=             13 LenVP=      357912785 MinMC=     180.
+ Entering FocIrr
+ FocIrr was handed  4294964776 working-precision words and     3 shell-pairs
+ Leaving FocIrr
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=T BraDBF=T KetDBF=T FulRan=T
+         wScrn=  0.000000 ICntrl=       500 IOpCl=  0 I1Cent=   200000006 NGrid=           0
+         NMat0=    1 NMatS0=      1 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ FoFCou:  KetSym=T NOpSet=  1 NOpAb=1 NOp=  1.
+ FoFCou:  CnvScl= 1.00D+00 Thresh= 1.00D-12 IAcrcy=      10.
+ FoFCou: LinMIO=F DoNuc=F BraDBF=T KetDBF=T HaveP=T PDBF=T HaveZ=F HaveW=F
+         NIJTC =       0 NIJTAt=       0 NIJTCD=       1 NIJTT =       1
+         IJTBeg=       1 IJTEnd=       1 KLTBeg=       1 KLTEnd=       1
+         IPTBeg=       1 IPTEnd=       1 IPTBCv=       1 IPTECv=       1
+         IZTBeg=       1 IZTEnd=       0 IZTBCv=       1 IZTECv=       1
+         IWTBeg=       1 IWTEnd=       1 IWTBCv=       1 IWTECv=       1
+         INTBeg=       1 INTEnd=       0 IFTBCv=       1 IFTECv=       1
+ Entering DenIrr
+ DenIrr was handed  4294966736 working-precision words and     2 shell-pairs
+ Leaving DenIrr, iEnd w/o den=        1175 nHerm=           2.
+ CoulSu-InSpLW:  IPartL=    0 NPrtUS=   12 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=   11 NThAct=   12.
+ CoulSu:  IncTry=  1024 NBBP=              4 NTPThr=   100 NPartT=   12 Incr=           1 LDynOK=F GPUOK=F.
+ CoulSu:  NPrtUS=  12 ThrOK=T IAlg=1 LenDen=           2 LWGrdD=           0 DoCopy=T ISkipM=0
+          DoSpLW=F IThBeg=    0 IThEnd=   11.
+ CoulSu:  IPart=    0 IPartR=    0 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    3 IPartR=    3 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    8 IPartR=    8 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=   10 IPartR=   10 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    6 IPartR=    6 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  0 JobTyp=20 DoJE=T Cont=T.
+ CoulSu:  IPart=    4 IPartR=    4 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  6 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=     0 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ CoulSu:  IPart=    2 IPartR=    2 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=     6 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ CoulSu:  IPart=    5 IPartR=    5 CPU=   -1 GPU=   -1.
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ CoulSu:  IPart=   11 IPartR=   11 CPU=   -1 GPU=   -1.
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ CoulSu:  IPart=    1 IPartR=    1 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  4 JobTyp=20 DoJE=T Cont=T.
+ CoulSu:  IPart=    7 IPartR=    7 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  3 JobTyp=20 DoJE=T Cont=T.
+ CoulSu:  IPart=    9 IPartR=    9 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  7 JobTyp=20 DoJE=T Cont=T.
+ Enter PrismC:  IPart=  9 JobTyp=20 DoJE=T Cont=T.
+ Enter PrismC:  IPart=  8 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=     4 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC:  IPart=     9 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     8 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     3 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     7 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ Enter PrismC:  IPart= 11 JobTyp=20 DoJE=T Cont=T.
+ Enter PrismC:  IPart= 10 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=    11 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart=  5 JobTyp=20 DoJE=T Cont=T.
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ PrismC:  IPart=    10 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart=  1 JobTyp=20 DoJE=T Cont=T.
+ PrismC:  IPart=     5 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC:  IPart=     1 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart=  2 JobTyp=20 DoJE=T Cont=T.
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     2 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ PrismC was handed   357913132 working-precision words and     2 shell-pairs
+ IPart=  6 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   12.
+ IPart=  4 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  0 NShTot=           4 NShNF=           4 NShFF=           0 MinMC=     164
+           NShCPU=           4 NBCPU=           4 AvBCPU=         1.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   11.
+ CoulSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   10.
+ IPart=  7 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    9.
+ IPart=  8 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    8.
+ IPart=  5 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart=  2 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    6.
+ IPart=  3 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    5.
+ IPart=  9 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    4.
+ IPart= 11 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart= 10 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    3.
+ CoulSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    2.
+ IPart=  1 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     164
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    1.
+ CoulSu:  NxtVal=             13 LenVP=      357913133 MinMC=     164.
+ Entering FocIrr
+ FocIrr was handed  4294965558 working-precision words and     2 shell-pairs
+ Leaving FocIrr
+ Entering DenIrr
+ DenIrr was handed  4294966736 working-precision words and     2 shell-pairs
+ Leaving DenIrr, iEnd w/o den=        1233 nHerm=          21.
+ CoulSu-InSpLW:  IPartL=    0 NPrtUS=   12 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=   11 NThAct=   12.
+ CoulSu:  IncTry=  1024 NBBP=              4 NTPThr=   100 NPartT=   12 Incr=           1 LDynOK=F GPUOK=F.
+ CoulSu:  NPrtUS=  12 ThrOK=T IAlg=1 LenDen=          21 LWGrdD=           0 DoCopy=T ISkipM=0
+          DoSpLW=F IThBeg=    0 IThEnd=   11.
+ CoulSu:  IPart=    0 IPartR=    0 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=   10 IPartR=   10 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  0 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=    2 IPartR=    2 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=     0 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart= 10 JobTyp=20 DoJE=T Cont=F.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ CoulSu:  IPart=    6 IPartR=    6 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  2 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=    4 IPartR=    4 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  6 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=    8 IPartR=    8 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  4 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=    5 IPartR=    5 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  8 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=   11 IPartR=   11 CPU=   -1 GPU=   -1.
+ CoulSu:  IPart=    3 IPartR=    3 CPU=   -1 GPU=   -1.
+ PrismC:  IPart=    10 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ CoulSu:  IPart=    7 IPartR=    7 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  5 JobTyp=20 DoJE=T Cont=F.
+ CoulSu:  IPart=    9 IPartR=    9 CPU=   -1 GPU=   -1.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ CoulSu:  IPart=    1 IPartR=    1 CPU=   -1 GPU=   -1.
+ Enter PrismC:  IPart=  3 JobTyp=20 DoJE=T Cont=F.
+ Enter PrismC:  IPart=  7 JobTyp=20 DoJE=T Cont=F.
+ Enter PrismC:  IPart=  9 JobTyp=20 DoJE=T Cont=F.
+ Enter PrismC:  IPart=  1 JobTyp=20 DoJE=T Cont=F.
+ PrismC:  IPart=     2 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC:  IPart=     5 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     3 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ Enter PrismC:  IPart= 11 JobTyp=20 DoJE=T Cont=F.
+ PrismC:  IPart=     9 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ PrismC:  IPart=    11 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     1 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     7 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     6 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     4 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ PrismC:  IPart=     8 DynPar=F LinDyn=F Incr=           1 UseFst=F UseS4=T ISplat=2.
+ PrismC was handed   357913089 working-precision words and     2 shell-pairs
+ IPart=  0 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   12.
+ IPart= 10 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   11.
+ IPart=  2 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   10.
+ IPart=  7 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  1 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  3 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart= 11 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  4 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    9.
+ IPart=  5 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ IPart=  6 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    8.
+ CoulSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart=  8 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    6.
+ IPart=  9 NShTot=           0 NShNF=           0 NShFF=           0 MinMC=     148
+           NShCPU=           0 NBCPU=           0 AvBCPU=         0.0
+           NShGPU=           0 NBGPU=           0 AvBGPU=         0.0
+ CoulSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    5.
+ CoulSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    4.
+ CoulSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    3.
+ CoulSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    2.
+ CoulSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    1.
+ CoulSu:  NxtVal=             13 LenVP=      357913090 MinMC=     148.
+ Entering FocIrr
+ FocIrr was handed  4294965462 working-precision words and     2 shell-pairs
+ Leaving FocIrr
+ FoFCou EC=  1.71745878149     ENF=  1.71745878149    
+ IB=1 NBFU=    2 NOccSy=    0
+ Diag=  -0.67603   0.04179
+ IAlgDg is returning  0.
+ DiagDN:  BShift=  1.00D+00
+ Eigenvalues and eigenvectors of Harris matrix:
+ Alpha MOs:
+                           1         2
+     Eigenvalues --    -0.73006   0.09582
+   1                    0.28492   1.15198
+   2                    0.81735  -0.86034
+ Harris En= -3.11184193539982    
+ JPrj=0 DoOrth=F DoCkMO=F.
+ Guess MO coefficients:
+                 1             2 
+      1   0.284916D+00  0.115198D+01
+      2   0.817347D+00 -0.860336D+00
+ Leave Link  401 at Thu Jul 22 07:00:01 2021, MaxMem=  4294967296 cpu:               1.0 elap:               0.1
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l405.exe)
+          Truncation Level=               99999
+          a=  1          b=  0          c=  1
+          a=N/2 - s   b=2s   c=n- (a+b)
+          no. active orbitals (n)  2
+          no. active ELECTRONS (N)=  2
+          SLATER DETERMINANT BASIS
+                                                  IRREPS TO BE RETAINED = 1
+                                                  GROUP IRREP. MULT. TABLE
+                                                      1
+                                                  IRREP. LABELS FOR ORBITALS
+                                                   1 1
+          BOTTOM WEIGHT=  2     TOP WEIGHT=  4
+          Configuration         1 Symmetry 1 10
+          Configuration         2 Symmetry 1 ba
+          Configuration         3 Symmetry 1 ab
+          Configuration         4 Symmetry 1 01
+          NO OF BASIS FUNCTIONS =         4 NO TO BE DELETED =    0
+ CI Matrix Elements calculated here
+          NO. OF CONFIGURATIONS IN REFERENCE SPACE =    1
+                                   SECONDARY SPACE =    4
+                                   TERTIARY SPACE =    4
+          NO. OF ORBITALS =    2
+          NO. OF ELECTRONS =    2
+          NO. OF WEIGHTS =    3
+          REFERENCE STATE CONFIGURATIONS ARE:     0
+          NO. OF CORE ORBITALS =    0
+          OPTION:  NON-DIAGONAL HOLE LINE INTERACTIONS INCLUDED
+ Len28=         110 LenMCI=         117.
+ Leave Link  405 at Thu Jul 22 07:00:04 2021, MaxMem=  4294967296 cpu:              38.4 elap:               3.2
+ (Enter /home/kranka/proj_isborn/gdv_links_KR/gdvi14+/l510/l510.exe)
+ GetPCM: File not found, return IValue=0.
+ Enter MCSCF program.
+ Maximum number of iterations =***
+ ENTER RPARM ... BEFORE TO START MCSCF COMPUTATION
+                    NO OF ORBITALS        =    2
+ NBasis=    2 NCore=    0 NVal=    2 NVirt=    0 IFrame=0 Acc=  1.00D-08.
+                    DAMPING FACTORS                              LEVEL SHIFTERS
+                    CO        OO        CV        OV             CORE-C    VIRTUAL-O VALENCE-V
+                      1.000000  1.000000  1.000000  1.000000     0.000000  0.000000  0.000000
+
+                    FACUV (DENSITY MATRIX SCALING FACTOR)=   2.00000
+                    NO OF OLD CORES FOR LEVYS DAMPING=    0
+                    LEVYS DAMPING FACTORS (IGNORED IF ZERO)
+                    VALENCE-VALENCE                    =   0.00000
+                    VALENCE-VIRTUAL AND VIRTUAL-VIRTUAL=   0.00000
+                    DAVIDON SCALING ON
+                    TO START ON ITERATION NO    0
+                    MAX VALUE OF FOCK MATRIX ELEMENT ALLOWED=  0.000000
+                    DAVIDON SCALING VALUE                   =  0.000000
+ READ M.O. COEFFICIENTS FROM THE GAUSS.80 RW-FILE 524
+ GUESS M.O. COEFFICIENT MATRIX
+ (M.O.S ORDERED BY COLUMNS NOT BY ROWS)
+                 1             2 
+      1   0.284916D+00  0.115198D+01
+      2   0.817347D+00 -0.860336D+00
+          ROTATIONS OF THE FOLLOWING ELEMENTS OF THE FOCK MATRIX ARE RESTRICTED WHEN A VALUE IS 1
+   0
+   0  0
+ NUCL. POTENTIAL =        1.3709254169
+ RPARM TERMINATED ... EXIT
+ *-----------------------------------------------------------------------------*
+ *-----------------------------------------------------------------------------*
+ ENTER ... ORTHO (ORTHOGONALIZE THE INITIAL MO COEFF.)
+ The Orbitals are already orthogonal Skip Orthogonalization
+ ORTHO ... TERMINATED ... EXIT
+ ENTER DrUpdI ... ITERATION NO.  0
+  Memory needed for Incore Integrals:                  262150
+  Integrals KEPT IN MEMORY
+  Number of Integrals =                       6
+  If GF1 and GF2 are used you need words:                   25656
+ IBUJAK length=                      24
+ SETSF ... NUMBER OF PROCESSED 2-E INTEGRALS =     6     TOTAL NUMBER OF INTEGRALS =     6
+ OPERATION PERFORMED SUCCESSFULLY
+ NUMBER OF RECORDS READ IN 2E-INTEGRAL PROCESSING=     1
+ OUTPUT OPERATION COMPLETED ON THE F MATRICES
+ CORE J AND K COMPLETED SUCCESSFULLY
+ UPDINT TERMINATED ... EXIT
+ DrUpdI TERMINATED ... EXIT
+ ENTER DENMAT ... ITERATION NO.  0
+ Memory needed for DENMAT :
+ For the Intergals (Not used here).......... =         6
+ For the Molecular Orbitals................. =         4
+ For the New Density Matrices............... =         3
+ For the OLD Density Matrices............... =         3
+ Total...................................... =        16
+ DENMAT TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2400 PARTIAL=     0.0000
+
+ ENTER SETCOR ... ITERATION NO.  0
+ Memory needed for SSCORE:
+ For the Intergals.......................... =         6
+ For the Density Matrices................... =         3
+ For The J and K Fock Matrices.............. =         6
+ For the one electron integral.............. =         0
+ Total...................................... =        16
+ OUTPUT OPERATION COMPLETED ON THE F MATRICES
+ CORE J AND K COMPLETED SUCCESSFULLY
+ SETCOR TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2400 PARTIAL=     0.0000
+
+ ENTER TRAN ... ITERATION NO.  0
+ AVAILABLE MEMORY FOR -BETA- VECTOR ... IMEM=  4294967246
+ YREAD ... NO CORE-ORBITALS
+          12 Words of memory needed for the BETA vector in ONE step Tranformation
+  4294967246 Words available.
+ TRAN   TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2400 PARTIAL=     0.0000
+
+ ENTER AO2MO ... ITERATION NO.  0
+ Memory needed for AO2MO  :
+ For the Intergals (Not used here)......... =         6
+ For scratch array (VL3)(nsq).............. =         4
+ For 1 rec of Totaly Transformed Integrals. =         3
+ For the Molecular Orbitals................ =         4
+ For 1 rec of partially Transformed Integr. =         4
+ For scratch array (VL1)................... =         4
+ For scratch array (VL2)................... =         4
+ Total..................................... =        30
+ AO2MO TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2400 PARTIAL=     0.0000
+
+                    **************************
+                    *                        *
+                    *   ITERATION NO=    0   *
+                    *                        *
+                    **************************
+ ENTER REFSC ... ITERATION NO.  0
+ READ THE FIRST RECORD FROM UNIT 2800
+ FIRST RECORD IS ...         3         4         4         2
+ Memory needed for SREF  :
+ For the Intergals (Not used here)......... =         6
+ For the Lower Triangle of Hamiltonian..... =        10
+ For all the CI vectors.................... =        16
+ For all the Energies of the NSEC states... =         4
+ For Energy with fixed coef (scratch vector)=         4
+ For scratch vector(NSEC*NSEC) THETA....... =         0
+ For scratch vector(NSEC*NSEC) TH2......... =         0
+ For scratch vector(NSEC) in HBLOCK EigenV. =         0
+ For scratch vector(NSEC) in HBLOCK Energy. =         0
+ For scratch vector(NSEC) ....not used..... =         0
+ For the Symbolic Dens Mat indexes......... =     10000
+ For the Symbolic Denity Matrices VALUES... =     10000
+ For a scratch working array in READJK..... =        12
+ For scratch vector(NSEC*NSEC) VL1......... =         0
+ For scratch vector(NSEC*NSEC) VL2......... =        12
+ Total..................................... =     20065
+  define bucket ibunc2
+                    CORE HAMILTONIAN        = 0.00000000E+00
+                    ONE ELECTRON HAMILTONIAN= 0.00000000E+00
+ The integrals for the CI are: 
+                1             2             3 
+      1  0.894619D+00
+      2 -0.167457D+00  0.173977D+00
+      3  0.689484D+00  0.193691D-01  0.744489D+00
+ ENTER HDIAG1 ...
+ EXIT HDIAG1 ...
+
+                    VECTOR USED=         4
+                    **********************************
+                    *                                *
+                    *   TOTAL ENERGY=   -0.4921346   *
+                    *                                *
+                    **********************************
+ MCSCF TOTAL ENERGY(FROM REFSC) AT ITN.  0     -0.4921346
+ Eigenvector used to compute density matrices:
+  8.78D-02 2.25D-01 2.25D-01 9.44D-01
+ REFSC  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2500 PARTIAL=     0.0100
+
+ ENTER STGAM ... ITERATION NO.  1
+ Defining IBUGAM
+ Forms   4 Reduced Density Matrices
+ EIGENVECTOR USED TO COMPUTE DENSITY MATRICES SET  1
+                 1             2             3             4 
+      1   0.877708D-01  0.225202D+00  0.225202D+00  0.943856D+00
+ Bra  VECTOR USED TO COMPUTE DENSITY MATRICES ...  1
+                 1             2             3             4 
+      1   0.877708D-01  0.225202D+00  0.225202D+00  0.943856D+00
+ Ket  VECTOR USED TO COMPUTE DENSITY MATRICES ...  1
+                 1             2             3             4 
+      1   0.877708D-01  0.225202D+00  0.225202D+00  0.943856D+00
+ (RdTape) Den mat in place:                       1
+                1             2 
+      1  0.116840D+00
+      2  0.929299D+00  0.188316D+01
+ STGAM  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2500 PARTIAL=     0.0000
+
+ ENTER SETF2 ... ITERATION NO.  1
+ SETF2  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2500 PARTIAL=     0.0000
+
+ ENTER SETF1 ... ITERATION NO.  1
+ SETF1  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2500 PARTIAL=     0.0000
+
+ ENTER FDIAG ... ITERATION NO.  1
+ MAXIMUM VALUE BETWEEN ISZ2 =    0   AND NBIGG =      6     IS ISZ3 =      6
+ ISZ3 IS NOW USED AS A POINTER FOR THE SFDIAG CALL ...
+ FIRST ORDER DENSITY MATRIX BY ROWS (X,Y)
+
+   0.116840
+   0.929299  1.883160
+ ALL SECOND DERIVATIVES IN IJIJ BLOCK ARE POSITIVE OR ZERO UNLESS INDICATED BELOW
+ LABELS ARE IJ OF G-IJIJ
+
+     2   1
+  -2.127826
+
+
+ FINAL F MATRIX PRIOR TO DIAGONALISATION
+
+
+ DIAGONAL ELEMENTS OF FOCK OPERATORS F1 AND F2
+ F1
+
+  -2.876068 -1.195395
+ F2
+
+  -0.059066 -1.014227
+          FOCK OPERATOR ENERGY   -1.073293   CORE CONTRIB=    0.000000   VALENCE CONTRIB=   -1.073293
+ 2ND ORD PT ENERGY     CV    0.000000   CU    0.000000   UV    0.000000
+ TOTAL                      -0.492135
+ 2ND ORD PT ENERGY CORRECTIONS ARISING FROM
+ THE OFF DIAGONAL ELEMENTS OF THE UNSCALED FOCK MATRIX FOR VALUES GREATER THAN  0.001000
+ I,J OVER VALUE OF ELEMENT
+     2   1
+  -0.122231
+
+
+     LARGE ROTATION  VECTOR    1
+       0.965988 -0.258587
+ FDIAG  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2500 PARTIAL=     0.0000
+
+ ITN=  1 MaxIt=*** E=     -0.4921345610 DE=-4.92D-01 Acc= 1.00D-08 Lan=  0
+ ENTER FOP ... ITERATION NO.  1
+          ************************************
+          *                                  *
+          *   TOTAL ENERGY=    -0.49213456   *
+          ************************************
+ FINAL COEFFICIENT MATRIX
+ ROW NO  1
+    -0.0226617    1.0120191
+ ROW NO  2
+     1.1864737   -0.6197184
+ FINAL EIGENVECTOR
+     0.0877708    0.2252024    0.2252024    0.9438559
+ FOP TERMINATED ... EXIT
+ ENTER DENMAT ... ITERATION NO.  1
+ DENMAT TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2600 PARTIAL=     0.0000
+
+ ENTER SETCOR ... ITERATION NO.  1
+ OUTPUT OPERATION COMPLETED ON THE F MATRICES
+ CORE J AND K COMPLETED SUCCESSFULLY
+ SETCOR TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2600 PARTIAL=     0.0000
+
+ ENTER TRAN ... ITERATION NO.  1
+ TRAN   TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2600 PARTIAL=     0.0000
+
+ ENTER AO2MO ... ITERATION NO.  1
+ AO2MO TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2600 PARTIAL=     0.0000
+
+                    **************************
+                    *                        *
+                    *   ITERATION NO=    1   *
+                    *                        *
+                    **************************
+ ENTER REFSC ... ITERATION NO.  1
+ READ THE FIRST RECORD FROM UNIT 2800
+ FIRST RECORD IS ...         3         4         4         2
+                    CORE HAMILTONIAN        = 0.00000000E+00
+                    ONE ELECTRON HAMILTONIAN= 0.00000000E+00
+ The integrals for the CI are: 
+                1             2             3 
+      1  0.106661D+01
+      2 -0.139322D+00  0.659335D-01
+      3  0.581441D+00  0.485404D-01  0.788588D+00
+ ENTER HDIAG1 ...
+ EXIT HDIAG1 ...
+
+                    VECTOR USED=         4
+                    **********************************
+                    *                                *
+                    *   TOTAL ENERGY=   -0.4921346   *
+                    *                                *
+                    **********************************
+ MCSCF TOTAL ENERGY(FROM REFSC) AT ITN.  1     -0.4921346
+ Eigenvector used to compute density matrices:
+  3.25D-02-1.88D-02-1.88D-02 9.99D-01
+ REFSC  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2600 PARTIAL=     0.0000
+
+ ENTER STGAM ... ITERATION NO.  2
+ Forms   4 Reduced Density Matrices
+ EIGENVECTOR USED TO COMPUTE DENSITY MATRICES SET  4
+                 1             2             3             4 
+      1   0.325073D-01 -0.187582D-01 -0.187582D-01  0.999119D+00
+ Bra  VECTOR USED TO COMPUTE DENSITY MATRICES ...  1
+                 1             2             3             4 
+      1   0.325073D-01 -0.187582D-01 -0.187582D-01  0.999119D+00
+ Ket  VECTOR USED TO COMPUTE DENSITY MATRICES ...  1
+                 1             2             3             4 
+      1   0.325073D-01 -0.187582D-01 -0.187582D-01  0.999119D+00
+ (RdTape) Den mat in place:                       1
+                1             2 
+      1  0.281720D-02
+      2 -0.774059D-01  0.199718D+01
+ STGAM  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2600 PARTIAL=     0.0000
+
+ ENTER SETF2 ... ITERATION NO.  2
+ SETF2  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2700 PARTIAL=     0.0100
+
+ ENTER SETF1 ... ITERATION NO.  2
+ SETF1  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2700 PARTIAL=     0.0000
+
+ ENTER FDIAG ... ITERATION NO.  2
+ FIRST ORDER DENSITY MATRIX BY ROWS (X,Y)
+
+   0.002817
+  -0.077406  1.997183
+ ALL SECOND DERIVATIVES IN IJIJ BLOCK ARE POSITIVE OR ZERO UNLESS INDICATED BELOW
+ LABELS ARE IJ OF G-IJIJ
+
+     2   1
+  -1.917187
+
+
+ FINAL F MATRIX PRIOR TO DIAGONALISATION
+
+
+ DIAGONAL ELEMENTS OF FOCK OPERATORS F1 AND F2
+ F1
+
+  -2.991215 -1.080249
+ F2
+
+   0.001009 -1.074303
+          FOCK OPERATOR ENERGY   -1.073293   CORE CONTRIB=    0.000000   VALENCE CONTRIB=   -1.073293
+ 2ND ORD PT ENERGY     CV    0.000000   CU    0.000000   UV    0.000000
+ TOTAL                      -0.492135
+ 2ND ORD PT ENERGY CORRECTIONS ARISING FROM
+ THE OFF DIAGONAL ELEMENTS OF THE UNSCALED FOCK MATRIX FOR VALUES GREATER THAN  0.001000
+ I,J OVER VALUE OF ELEMENT
+     2   1
+  -0.000751
+
+
+ FDIAG  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.2900 PARTIAL=     0.0200
+
+ ITN=  2 MaxIt=*** E=     -0.4921345610 DE=-6.66D-16 Acc= 1.00D-08 Lan=  0
+ ENTER FOP ... ITERATION NO.  2
+          ************************************
+          *                                  *
+          *   TOTAL ENERGY=    -0.49213456   *
+          ************************************
+ FINAL COEFFICIENT MATRIX
+ ROW NO  1
+     0.0003653    0.9998033
+ ROW NO  2
+     1.1866901   -0.6392392
+ FINAL EIGENVECTOR
+     0.0325073   -0.0187582   -0.0187582    0.9991194
+ FOP TERMINATED ... EXIT
+ ... Do an extra-iteration for final printing.
+ ENTER DENMAT ... ITERATION NO.  2
+ DENMAT TERMINATED ... EXIT ...   TIMING: TOTAL=    64.3100 PARTIAL=     0.0000
+
+ ENTER SETCOR ... ITERATION NO.  2
+ OUTPUT OPERATION COMPLETED ON THE F MATRICES
+ CORE J AND K COMPLETED SUCCESSFULLY
+ SETCOR TERMINATED ... EXIT ...   TIMING: TOTAL=    64.3100 PARTIAL=     0.0000
+
+ ENTER TRAN ... ITERATION NO.  2
+ TRAN   TERMINATED ... EXIT ...   TIMING: TOTAL=    64.3100 PARTIAL=     0.0000
+
+ ENTER AO2MO ... ITERATION NO.  2
+ AO2MO TERMINATED ... EXIT ...   TIMING: TOTAL=    64.3100 PARTIAL=     0.0000
+
+                    **************************
+                    *                        *
+                    *   ITERATION NO=    2   *
+                    *                        *
+                    **************************
+ ENTER REFSC ... ITERATION NO.  2
+ READ THE FIRST RECORD FROM UNIT 2800
+ FIRST RECORD IS ...         3         4         4         2
+                    CORE HAMILTONIAN        = 0.00000000E+00
+                    ONE ELECTRON HAMILTONIAN= 0.00000000E+00
+ The integrals for the CI are: 
+                1             2             3 
+      1  0.105553D+01
+      2 -0.145856D+00  0.733787D-01
+      3  0.588886D+00  0.497491D-01  0.784770D+00
+ FINAL H MATRIX
+                1             2             3             4 
+      1 -0.414463D+01
+      2 -0.189498D+00 -0.333629D+01
+      3 -0.189498D+00  0.733787D-01 -0.333629D+01
+      4  0.733787D-01  0.610665D-02  0.610665D-02 -0.186542D+01
+ ENTER HDIAG1 ...
+ EXIT HDIAG1 ...
+
+                    VECTOR USED=         4
+                    **********************************
+                    *                                *
+                    *   TOTAL ENERGY=   -0.4921346   *
+                    *                                *
+                    **********************************
+ MCSCF TOTAL ENERGY(FROM REFSC) AT ITN.  2     -0.4921346
+ Eigenvector used to compute density matrices:
+  3.21D-02 8.83D-06 8.83D-06 9.99D-01
+ FINAL EIGENVALUES AND EIGENVECTORS
+ VECTOR EIGENVALUES     CORRESPONDING EIGENVECTOR
+
+ kranka test CI
+
+     1    -2.8510240      0.96257070          0.19039321          0.19039321         -0.30959709E-01
+
+     2    -2.0387412     -0.13322676E-14      0.70710678         -0.70710678          0.57112365E-16
+
+     3    -1.8170195     -0.26911791          0.68099224          0.68099224          0.86428215E-02
+
+     4    -0.4921346      0.32143457E-01      0.88285681E-05      0.88285681E-05      0.99948327    
+
+
+                    EIGENVALUES AND  EIGENVECTORS OF CI MATRIX
+
+
+
+   ( 1)     EIGENVALUE   -2.851024028    
+ (    1) 0.9625707 (    2) 0.1903932 (    3) 0.1903932 (    4)-0.0309597 (
+
+
+   ( 2)     EIGENVALUE   -2.038741248       22.1033 eV
+ (    2) 0.7071068 (    3)-0.7071068 (    1)-0.0000000 (    4) 0.0000000 (
+
+
+   ( 3)     EIGENVALUE   -1.817019500       28.1367 eV
+ (    3) 0.6809922 (    2) 0.6809922 (    1)-0.2691179 (    4) 0.0086428 (
+
+
+   ( 4)     EIGENVALUE  -0.4921345610       64.1886 eV
+ (    4) 0.9994833 (    1) 0.0321435 (    3) 0.0000088 (    2) 0.0000088 (
+ REFSC  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.3100 PARTIAL=     0.0000
+
+ ENTER STGAM ... ITERATION NO.  3
+ Forms   4 Reduced Density Matrices
+ EIGENVECTOR USED TO COMPUTE DENSITY MATRICES SET  4
+                 1             2             3             4 
+      1   0.321435D-01  0.882857D-05  0.882857D-05  0.999483D+00
+ Bra  VECTOR USED TO COMPUTE DENSITY MATRICES ...  1
+                 1             2             3             4 
+      1   0.321435D-01  0.882857D-05  0.882857D-05  0.999483D+00
+ Ket  VECTOR USED TO COMPUTE DENSITY MATRICES ...  1
+                 1             2             3             4 
+      1   0.321435D-01  0.882857D-05  0.882857D-05  0.999483D+00
+ (RdTape) Den mat in place:                       1
+                1             2 
+      1  0.206640D-02
+      2  0.364311D-04  0.199793D+01
+ Final one electron symbolic density matrix:
+                1             2 
+      1  0.206640D-02
+      2  0.364311D-04  0.199793D+01
+ FINAL TWO ELECTRON DENSITY MATRIX
+ SELECTED TERMS ONLY- IIII(DIAGONAL),IIJJ(COULOMB),IJIJ(EXCHANGE)
+ IJIJ ABOVE DIAGONAL IIJJ BELOW
+ ROWS ARE INDEXED BY I, COLUMNS BY J
+   0.001033       0.064254
+   0.000000       0.998967
+ STGAM  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.3100 PARTIAL=     0.0000
+
+ ENTER SETF2 ... ITERATION NO.  3
+ SETF2  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.3100 PARTIAL=     0.0000
+
+ ENTER SETF1 ... ITERATION NO.  3
+ SETF1  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.3100 PARTIAL=     0.0000
+
+ ENTER FDIAG ... ITERATION NO.  3
+ FIRST ORDER DENSITY MATRIX BY ROWS (X,Y)
+
+   0.002066
+   0.000036  1.997934
+ ALL SECOND DERIVATIVES IN IJIJ BLOCK ARE POSITIVE OR ZERO UNLESS INDICATED BELOW
+ LABELS ARE IJ OF G-IJIJ
+
+     2   1
+  -1.916209
+
+
+ FINAL F MATRIX PRIOR TO DIAGONALISATION
+
+
+ DIAGONAL ELEMENTS OF FOCK OPERATORS F1 AND F2
+ F1
+
+  -2.991476 -1.079987
+ F2
+
+   0.001523 -1.074816
+          FOCK OPERATOR ENERGY   -1.073293   CORE CONTRIB=    0.000000   VALENCE CONTRIB=   -1.073293
+ 2ND ORD PT ENERGY     CV    0.000000   CU    0.000000   UV    0.000000
+ TOTAL                      -0.492135
+ 2ND ORD PT ENERGY CORRECTIONS ARISING FROM
+ THE OFF DIAGONAL ELEMENTS OF THE UNSCALED FOCK MATRIX FOR VALUES GREATER THAN  0.001000
+ I,J OVER VALUE OF ELEMENT
+
+ NONE FOUND
+
+ THE OFF DIAGONAL ELEMENTS OF THE UNSCALED FOCK MATRIX FOR VALUES GREATER THAN  0.000100
+ I,J OVER VALUE OF ELEMENT
+
+ NONE FOUND
+
+ THE OFF DIAGONAL ELEMENTS OF THE UNSCALED FOCK MATRIX FOR VALUES GREATER THAN  0.000010
+ I,J OVER VALUE OF ELEMENT
+     2   1
+  -0.000000
+ FDIAG  TERMINATED ... EXIT ...   TIMING: TOTAL=    64.3100 PARTIAL=     0.0000
+
+ ****************************
+  spin density
+ ****************************
+ 1st state is                       1
+ 2nd state is                       1
+ MO valence ground state density (alpha):
+                1             2 
+      1  0.962792D+00
+      2  0.177372D+00  0.372081D-01
+ MO valence ground state density (beta):
+                1             2 
+      1  0.962792D+00
+      2  0.177372D+00  0.372081D-01
+ AO Ground state density (alpha):
+                1             2 
+      1  0.525515D-01
+      2  0.182530D+00  0.750895D+00
+ AO Ground state density (beta):
+                1             2 
+      1  0.525515D-01
+      2  0.182530D+00  0.750895D+00
+ 1st state is                       2
+ 2nd state is                       2
+ MO valence density for excited state (alpha):
+                1             2 
+      1  0.500000D+00
+      2  0.000000D+00  0.500000D+00
+ MO valence density for excited state (beta):
+                1             2 
+      1  0.500000D+00
+      2  0.000000D+00  0.500000D+00
+ AO density for excited state (alpha):
+                1             2 
+      1  0.704117D+00
+      2 -0.379107D+00  0.704117D+00
+ AO density for excited state (beta):
+                1             2 
+      1  0.704117D+00
+      2 -0.379107D+00  0.704117D+00
+ 1st state is                       3
+ 2nd state is                       3
+ MO valence density for excited state for IMat=    2 (alpha):
+                1             2 
+      1  0.536175D+00
+      2 -0.177382D+00  0.463825D+00
+ MO valence density for excited state for IMat=    2 (beta):
+                1             2 
+      1  0.536175D+00
+      2 -0.177382D+00  0.463825D+00
+ AO density for excited state for IMat=    2 (alpha):
+                1             2 
+      1  0.653020D+00
+      2 -0.562066D+00  0.952229D+00
+ AO density for excited state for IMat=    2 (beta):
+                1             2 
+      1  0.653020D+00
+      2 -0.562066D+00  0.952229D+00
+ 1st state is                       4
+ 2nd state is                       4
+ MO valence density for excited state for IMat=    3 (alpha):
+                1             2 
+      1  0.103320D-02
+      2  0.910779D-05  0.998967D+00
+ MO valence density for excited state for IMat=    3 (beta):
+                1             2 
+      1  0.103320D-02
+      2  0.910779D-05  0.998967D+00
+ AO density for excited state for IMat=    3 (alpha):
+                1             2 
+      1  0.140678D+01
+      2 -0.757784D+00  0.409226D+00
+ AO density for excited state for IMat=    3 (beta):
+                1             2 
+      1  0.140678D+01
+      2 -0.757784D+00  0.409226D+00
+ 1st state is                       1
+ 2nd state is                       2
+ MO Ground to excited state density (alpha):
+                 1             2 
+      1  -0.134628D+00  0.000000D+00
+      2   0.136128D+01  0.134628D+00
+ MO Ground to excited state density (beta):
+                 1             2 
+      1   0.134628D+00  0.000000D+00
+      2  -0.136128D+01 -0.134628D+00
+ Ground to excited state density (alpha):
+                 1             2 
+      1   0.135072D+00  0.152900D+01
+      2  -0.864190D-01 -0.116721D+01
+ Ground to excited state density (beta):
+                 1             2 
+      1  -0.135072D+00 -0.152900D+01
+      2   0.864190D-01  0.116721D+01
+ 1st state is                       1
+ 2nd state is                       3
+ MO Ground to excited state density for IMat=    2 (alpha):
+                 1             2 
+      1  -0.129389D+00  0.000000D+00
+      2   0.131430D+01  0.129389D+00
+ MO Ground to excited state density for IMat=    2 (beta):
+                 1             2 
+      1  -0.129389D+00  0.000000D+00
+      2   0.131430D+01  0.129389D+00
+ Ground to excited state density for IMat=    2 (alpha):
+                 1             2 
+      1   0.129818D+00  0.147661D+01
+      2  -0.830570D-01 -0.112634D+01
+ Ground to excited state density for IMat=    2 (beta):
+                 1             2 
+      1   0.129818D+00  0.147661D+01
+      2  -0.830570D-01 -0.112634D+01
+ 1st state is                       1
+ 2nd state is                       4
+ MO Ground to excited state density for IMat=    3 (alpha):
+                 1             2 
+      1   0.309420D-01  0.000000D+00
+      2   0.380607D+00 -0.309420D-01
+ MO Ground to excited state density for IMat=    3 (beta):
+                 1             2 
+      1   0.309420D-01  0.000000D+00
+      2   0.380607D+00 -0.309420D-01
+ Ground to excited state density for IMat=    3 (alpha):
+                 1             2 
+      1  -0.307909D-01  0.471362D+00
+      2   0.197000D-01 -0.257790D+00
+ Ground to excited state density for IMat=    3 (beta):
+                 1             2 
+      1  -0.307909D-01  0.471362D+00
+      2   0.197000D-01 -0.257790D+00
+ 1st state is                       3
+ 2nd state is                       2
+ Alpha MO transition density between states    3    2:
+                 1             2 
+      1  -0.481534D+00  0.000000D+00
+      2  -0.380590D+00  0.481534D+00
+ Beta  MO transition density between states    3    2:
+                 1             2 
+      1   0.481534D+00  0.000000D+00
+      2   0.380590D+00 -0.481534D+00
+ Alpha transition density between states    3    2:
+                 1             2 
+      1   0.481206D+00 -0.759517D+00
+      2  -0.307875D+00 -0.192637D+00
+ Beta  transition density between states    3    2:
+                 1             2 
+      1  -0.481206D+00  0.759517D+00
+      2   0.307875D+00  0.192637D+00
+ 1st state is                       4
+ 2nd state is                       2
+ Alpha MO transition density between states    4    2:
+                 1             2 
+      1  -0.624274D-05  0.000000D+00
+      2   0.454577D-01  0.624274D-05
+ Beta  MO transition density between states    4    2:
+                 1             2 
+      1   0.624274D-05  0.000000D+00
+      2  -0.454577D-01 -0.624274D-05
+ Alpha transition density between states    4    2:
+                 1             2 
+      1   0.228408D-04  0.539296D-01
+      2  -0.146063D-04 -0.344895D-01
+ Beta  transition density between states    4    2:
+                 1             2 
+      1  -0.228408D-04 -0.539296D-01
+      2   0.146063D-04  0.344895D-01
+ 1st state is                       4
+ 2nd state is                       3
+ Alpha MO transition density between states    4    3:
+                 1             2 
+      1  -0.864437D-02  0.000000D+00
+      2   0.437790D-01  0.864437D-02
+ Beta  MO transition density between states    4    3:
+                 1             2 
+      1  -0.864437D-02  0.000000D+00
+      2   0.437790D-01  0.864437D-02
+ Alpha transition density between states    4    3:
+                 1             2 
+      1   0.865695D-02  0.464135D-01
+      2  -0.553870D-02 -0.418508D-01
+ Beta  transition density between states    4    3:
+                 1             2 
+      1   0.865695D-02  0.464135D-01
+      2  -0.553870D-02 -0.418508D-01
+ ENTER FOP ... ITERATION NO.  3
+          ************************************
+          *                                  *
+          *   TOTAL ENERGY=    -0.49213456   *
+          ************************************
+ FINAL COEFFICIENT MATRIX
+ ROW NO  1
+     0.0003653    0.9998033
+ ROW NO  2
+     1.1866901   -0.6392392
+ FINAL EIGENVECTOR
+     0.0321435    0.0000088    0.0000088    0.9994833
+ MCSCF converged.
+ Leave Link  510 at Thu Jul 22 07:00:06 2021, MaxMem=  4294967296 cpu:              18.3 elap:               1.6
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l601.exe)
+ GetPMM: IRwPM=  824 LRwPM=    0 LPMAll=    2
+ GetPCM: File not found, return IValue=0.
+ Copying SCF densities to generalized density rwf, IOpCl= 0 IROHF=3.
+
+ **********************************************************************
+
+            Population analysis using the SCF Density.
+
+ **********************************************************************
+
+ Alpha  occ. eigenvalues --    0.00000
+ Alpha virt. eigenvalues --    0.00000
+     Molecular Orbital Coefficients:
+                           1         2
+                           O         V
+     Eigenvalues --     0.00000   0.00000
+   1 1   H  1S          0.00037   1.18669
+   2 2   He 1S          0.99980  -0.63924
+     Alpha Density Matrix:
+                           1         2
+   1 1   H  1S          0.05255
+   2 2   He 1S          0.18253   0.75090
+     Beta Density Matrix:
+                           1         2
+   1 1   H  1S          0.05255
+   2 2   He 1S          0.18253   0.75090
+    Full Mulliken population analysis:
+                           1         2
+   1 1   H  1S          0.10510
+   2 2   He 1S          0.19655   1.50179
+     Gross orbital populations:
+                         Total     Alpha     Beta      Spin
+   1 1   H  1S          0.30166   0.15083   0.15083   0.00000
+   2 2   He 1S          1.69834   0.84917   0.84917  -0.00000
+          Condensed to atoms (all electrons):
+               1          2
+     1  H    0.105103   0.196553
+     2  He   0.196553   1.501790
+          Atomic-Atomic Spin Densities.
+               1          2
+     1  H    0.000000   0.000000
+     2  He   0.000000  -0.000000
+ Mulliken charges and spin densities:
+               1          2
+     1  H    0.698344   0.000000
+     2  He   0.301656  -0.000000
+ Sum of Mulliken charges =   1.00000  -0.00000
+ Mulliken charges and spin densities with hydrogens summed into heavy atoms:
+               1          2
+     2  He   1.000000  -0.000000
+ DipInt: DoE/N= T F RetVal/Mat= T F Init=T NMatP=  1 IDeriv=0 Min/MaxMlt=  0  4
+ Entering OneElI...
+ OneElI was handed  4294967176 working-precision words.
+ Multipole integrals L=0 to 4 MinM= 0 MaxM= 0.
+ Requested accuracy = 0.1000D-12
+ ShPair: Thresh= 1.00D-13 NBox=     0 BxSize= 0.00D+00 RnKept= 1.46D+00
+         NSMCal=                    3 NSMKep=                   3
+ PrmmSu-InSpLW:  IPartL=    0 NPrtUS=    1 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=    0 NThAct=    1.
+ PrSmSu:  IncTry=   512 NBBP=              3 NTPThr=   100 NPartT=    1 Incr=           1 LDynOK=F GPUOK=F.
+ PrsmSu:  NPrtUS=   1 ThrOK=F IAlg=2 LenDen=           0 ISkipM=0 DoSpLW=F IThBeg=    0 IThEnd=    0.
+ Prism:   IPart=     0 DynPar=F LinDyn=F Incr=           1.
+ PRISM was handed  4294965851 working-precision words and     3 shell-pairs
+ IPart=  0 NShTot=           3 NBatch=           1 AvBLen=         3.0
+ PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=    1    1 IThBeg=    0 IThEnd=    0 CPU=   -1 GPU=   -1 NThAct=    1.
+ PrSmSu:  NxtVal=              2.
+ Electronic moments (au):
+         -2.00000000         -0.00000000         -0.00000000         -1.07244410
+         -0.81068048         -0.81068048         -1.71204913         -0.00000000
+         -0.00000000         -0.00000000         -0.00000000         -0.00000000
+         -1.64332890         -0.00000000         -0.00000000         -0.36290466
+         -0.00000000         -0.00000000         -0.36290466         -0.00000000
+         -1.48852342         -1.48852342         -3.95891174         -0.00000000
+         -0.00000000         -0.00000000         -0.00000000         -0.00000000
+         -0.00000000         -0.49617447         -0.83026560         -0.83026560
+         -0.00000000         -0.00000000         -0.00000000
+ Electronic spatial extent (au):  <R**2>=              3.3334
+ DipInt: DoE/N= F T RetVal/Mat= T F Init=T NMatP=  1 IDeriv=0 Min/MaxMlt=  0  4
+ Nuclear    moments (au):
+          3.00000000          0.00000000          0.00000000          0.72943428
+          0.00000000          0.00000000          1.59622312          0.00000000
+          0.00000000          0.00000000          0.00000000          0.00000000
+          0.38811329          0.00000000          0.00000000          0.00000000
+          0.00000000          0.00000000          0.00000000          0.00000000
+          0.00000000          0.00000000          0.84930942          0.00000000
+          0.00000000          0.00000000          0.00000000          0.00000000
+          0.00000000          0.00000000          0.00000000          0.00000000
+          0.00000000          0.00000000          0.00000000
+ Total      moments (au):
+          1.00000000          0.00000000          0.00000000         -0.34300981
+         -0.81068048         -0.81068048         -0.11582601          0.00000000
+          0.00000000          0.00000000          0.00000000          0.00000000
+         -1.25521561          0.00000000          0.00000000         -0.36290466
+          0.00000000          0.00000000         -0.36290466          0.00000000
+         -1.48852342         -1.48852342         -3.10960232          0.00000000
+          0.00000000          0.00000000          0.00000000          0.00000000
+          0.00000000         -0.49617447         -0.83026560         -0.83026560
+          0.00000000          0.00000000          0.00000000
+ Traceless Quadrup. (au):
+         -0.23161816         -0.23161816          0.46323632          0.00000000
+          0.00000000          0.00000000
+ Charge=              1.0000 electrons
+ Dipole moment (field-independent basis, Debye):
+    X=              0.0000    Y=              0.0000    Z=             -0.8718  Tot=              0.8718
+ Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -1.0904   YY=             -1.0904   ZZ=             -0.1558
+   XY=              0.0000   XZ=              0.0000   YZ=              0.0000
+ Traceless Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -0.3115   YY=             -0.3115   ZZ=              0.6231
+   XY=              0.0000   XZ=              0.0000   YZ=              0.0000
+ Octapole moment (field-independent basis, Debye-Ang**2):
+  XXX=              0.0000  YYY=              0.0000  ZZZ=             -0.8934  XYY=              0.0000
+  XXY=              0.0000  XXZ=             -0.2583  XZZ=              0.0000  YZZ=              0.0000
+  YYZ=             -0.2583  XYZ=              0.0000
+ Hexadecapole moment (field-independent basis, Debye-Ang**3):
+ XXXX=             -0.5606 YYYY=             -0.5606 ZZZZ=             -1.1712 XXXY=              0.0000
+ XXXZ=              0.0000 YYYX=              0.0000 YYYZ=              0.0000 ZZZX=              0.0000
+ ZZZY=              0.0000 XXYY=             -0.1869 XXZZ=             -0.3127 YYZZ=             -0.3127
+ XXYZ=              0.0000 YYXZ=              0.0000 ZZXY=              0.0000
+ N-N= 1.370925416891D+00 E-N=-7.481590035311D+00  KE= 2.345347123852D+00
+ Kinetic energy over alpha MOs:
+                1             2 
+      1  0.141135D+01
+      2 -0.665890D+00  0.134527D+01
+ Orbital energies and kinetic energies (alpha):
+                                 1                 2
+   1         O                 0.000000          1.411353
+   2         V                 0.000000          1.345273
+ Total kinetic energy from orbitals= 2.822706523575D+00
+                          Isotropic Fermi Contact Couplings
+        Atom                 a.u.       MegaHertz       Gauss      10(-4) cm-1
+     1  H(1)               0.00000       0.00000       0.00000       0.00000
+     2  He(3)             -0.00000       0.00000       0.00000       0.00000
+ Entering OneElI...
+ OneElI was handed  4294967128 working-precision words.
+ Calculate electrostatic properties
+    NBasis =     2  MinDer = 0  MaxDer = 0
+    NGrid  =     2  NMatD  =   1
+ Requested accuracy = 0.1000D-12
+ ShPair: Thresh= 1.00D-13 NBox=     0 BxSize= 0.00D+00 RnKept= 0.00D+00
+         NSMCal=                    3 NSMKep=                   0
+ --------------------------------------------------------
+       Center         ----  Spin Dipole Couplings  ----
+                      3XX-RR        3YY-RR        3ZZ-RR
+ --------------------------------------------------------
+     1   Atom        0.000000      0.000000      0.000000
+     2   Atom        0.000000      0.000000      0.000000
+ --------------------------------------------------------
+                        XY            XZ            YZ
+ --------------------------------------------------------
+     1   Atom        0.000000      0.000000      0.000000
+     2   Atom        0.000000      0.000000      0.000000
+ --------------------------------------------------------
+
+
+ ---------------------------------------------------------------------------------
+              Anisotropic Spin Dipole Couplings in Principal Axis System
+ ---------------------------------------------------------------------------------
+
+       Atom             a.u.   MegaHertz   Gauss  10(-4) cm-1        Axes
+
+              Baa     0.0000     0.000     0.000     0.000  1.0000  0.0000  0.0000
+     1 H(1)   Bbb     0.0000     0.000     0.000     0.000 -0.0000  1.0000  0.0000
+              Bcc     0.0000     0.000     0.000     0.000  0.0000  0.0000  1.0000
+ 
+              Baa     0.0000    -0.000    -0.000    -0.000  1.0000  0.0000  0.0000
+     2 He(3)  Bbb     0.0000    -0.000    -0.000    -0.000 -0.0000  1.0000  0.0000
+              Bcc     0.0000    -0.000    -0.000    -0.000  0.0000  0.0000  1.0000
+ 
+
+ ---------------------------------------------------------------------------------
+
+ Entering OneElI...
+ OneElI was handed  4294967128 working-precision words.
+ Calculate electrostatic properties
+    NBasis =     2  MinDer = 0  MaxDer = 0
+    NGrid  =     2  NMatD  =   1
+ Requested accuracy = 0.1000D-12
+ ShPair: Thresh= 1.00D-13 NBox=     0 BxSize= 0.00D+00 RnKept= 1.46D+00
+         NSMCal=                    3 NSMKep=                   3
+ PrmmSu-InSpLW:  IPartL=    0 NPrtUS=   12 NPrtUL=    1 DoSpLW=F IThBeg=    0 IThEnd=   11 NThAct=   12.
+ PrSmSu:  IncTry=   512 NBBP=              6 NTPThr=   100 NPartT=   12 Incr=           1 LDynOK=F GPUOK=F.
+ PrsmSu:  NPrtUS=  12 ThrOK=T IAlg=2 LenDen=           0 ISkipM=0 DoSpLW=F IThBeg=    0 IThEnd=   11.
+ Prism:   IPart=     0 DynPar=F LinDyn=F Incr=           1.
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ PRISM was handed   357913091 working-precision words and     3 shell-pairs
+ IPart=  7 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    7    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   12.
+ IPart= 10 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=   10    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   11.
+ IPart=  3 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    3    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=   10.
+ IPart=  1 NShTot=           2 NBatch=           1 AvBLen=         2.0
+ PrsmSu-ThDecC:  IPartSL=    1    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    9.
+ IPart=  9 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    9    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    8.
+ IPart=  5 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    5    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    7.
+ IPart=  4 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    4    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    6.
+ IPart=  0 NShTot=           2 NBatch=           1 AvBLen=         2.0
+ PrsmSu-ThDecC:  IPartSL=    0    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    5.
+ IPart=  6 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    6    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    4.
+ IPart=  8 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=    8    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    3.
+ IPart= 11 NShTot=           0 NBatch=           0 AvBLen=         0.0
+ PrsmSu-ThDecC:  IPartSL=   11    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    2.
+ IPart=  2 NShTot=           2 NBatch=           1 AvBLen=         2.0
+ PrsmSu-ThDecC:  IPartSL=    2    0 NPrtUSL=   12    1 IThBeg=    0 IThEnd=   11 CPU=   -1 GPU=   -1 NThAct=    1.
+ PrSmSu:  NxtVal=             13.
+ --------------------------------------------------------
+       Center         ----      EFG at Nuclei      ----
+                      3XX-RR        3YY-RR        3ZZ-RR
+ --------------------------------------------------------
+     1   Atom        0.756759      0.756759     -1.513519
+     2   Atom        0.099576      0.099576     -0.199151
+ --------------------------------------------------------
+                        XY            XZ            YZ
+ --------------------------------------------------------
+     1   Atom        0.000000      0.000000      0.000000
+     2   Atom        0.000000      0.000000      0.000000
+ --------------------------------------------------------
+
+
+ ---------------------------------------------------------------------------------
+              Nuclear Quadrupole Coupling Constant in Principal Axis System
+ ---------------------------------------------------------------------------------
+
+       Atom             a.u.   MegaHertz   Gauss  10(-4) cm-1        Axes
+
+
+ ---------------------------------------------------------------------------------
+
+ No NMR shielding tensors so no spin-rotation constants.
+ Leave Link  601 at Thu Jul 22 07:00:07 2021, MaxMem=  4294967296 cpu:               1.3 elap:               0.1
+ (Enter /opt/gaussian/gdv-20180628-i14+/gdv/l9999.exe)
+
+ Test job not archived.
+ 1\1\GINC-NODE06\SP\CASSCF\STO-3G\H1He1(1+)\KRANKA\22-Jul-2021\0\\#P CA
+ SSCF(2,2,fulldiag,NRoot=4,SaveGEDensities)/sto-3g scf(tight,maxcyc=100
+ ) nosymm scf(tight,maxcyc=1500,conventional) iop(3/33=6) extralinks(l3
+ 16,l308) noraff symm=noint iop(3/33=3) pop(full) iop(6/8=1,3/33=3,3/36
+ =1,4/33=3,5/33=3,6/33=3,9/33=3,5/72=-3)\\CAS(2,2)SCF/STO-3G, S2 state 
+ single point, pert. calc. (all density matrices printed)\\1,1\H,0,0.,0
+ .,-0.386\He,0,0.,0.,0.386\\Version=ES64L-GDVRevI.14+\HF=-0.4921346\RMS
+ D=0.000e+00\Dipole=0.,0.,-0.5861546\Quadrupole=-0.2316182,-0.2316182,0
+ .4632363,0.,0.,0.\PG=C*V [C*(H1He1)]\\@
+
+
+ GARBAGE IN, GARBAGE OUT
+ Job cpu time:       0 days  0 hours  1 minutes  6.1 seconds.
+ Elapsed time:       0 days  0 hours  0 minutes  5.9 seconds.
+ File lengths (MBytes):  RWF=      6 Int=      1 D2E=      0 Chk=      2 Scr=      1
+ Normal termination of Gaussian DV at Thu Jul 22 07:00:07 2021.
