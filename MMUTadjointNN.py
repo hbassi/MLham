@@ -2,7 +2,7 @@ from jax.config import config
 config.update("jax_enable_x64", True)
 import jax
 import jax.numpy as jnp
-from jax import jit, lax, vmap, grad, jacobian, random
+from jax import jit, lax, vmap, grad, jacobian, random, pmap, soft_pmap
 
 import numpy as np
 from read_traj import *
@@ -193,54 +193,39 @@ def gradflattener(td):
 # assume p is of size drc x drc    #
 #latter parameters are for forcing, aka everything past p
 def MLhamNN(x,y): #t, fldfrq,fldamp,tmeoff,norm_direc):
-    layerwidth = 128
-    inpmod = hk.Linear(layerwidth,w_init=hk.initializers.VarianceScaling(1.0, "fan_avg", "truncated_normal"))
-    hmod = hk.Linear(layerwidth,w_init=hk.initializers.VarianceScaling(1.0, "fan_avg", "truncated_normal"))
-    outmod = hk.Linear(2*drc**2,w_init=hk.initializers.VarianceScaling(1.0, "fan_avg", "truncated_normal"))
-    # produce real target
-    # x = jnp.real(p).reshape((drc**2))
-    # y = jnp.imag(p).reshape((drc**2))
-    #import pdb; pdb.set_trace()
+    layerwidth = 256
+    # inpmod = hk.Linear(layerwidth,w_init=hk.initializers.VarianceScaling(1.0, "fan_avg", "truncated_normal"))
+    # hmod = hk.Linear(layerwidth,w_init=hk.initializers.VarianceScaling(1.0, "fan_avg", "truncated_normal"))
+    # outmod = hk.Linear(2*drc**2,w_init=hk.initializers.VarianceScaling(1.0, "fan_avg", "truncated_normal"))
+    mlp = hk.Sequential([ 
+        hk.Linear(layerwidth,1,w_init =None ),
+        jax.nn.selu,
+        hk.Linear(layerwidth,1, w_init = None),
+        jax.nn.selu,
+        hk.Linear(layerwidth,1,w_init = None),
+        jax.nn.selu,
+        hk.Linear(2*drc**2, w_init = None)])
     x = x.flatten()
     y = y.flatten()
     inplyr = jnp.array(jnp.concatenate([x,y]))
-    h = jax.nn.relu(inpmod(inplyr))
-    for _ in range(10):
-        h += 1e-1*jax.nn.relu(hmod(h))
-    h = outmod(h)
-    #import pdb; pdb.set_trace()
+    h = mlp(inplyr)
     hreal = h[0:drc**2]
     himag = h[drc**2:]
     symmetrized_real = 0.5*(hreal.reshape((drc,drc)) + hreal.reshape((drc,drc)).T) 
     antisymmetrized_imag = 0.5*(himag.reshape((drc,drc)) - himag.reshape((drc,drc)).T)
-    #split into two pieces, real mat drc x drc, can use this matrix + tranpose /2, second piece with drc x drc, can use this matrix - tranpose/2 
-    #constructed real and imag parts of hamiltonian such that they are always hermitian
-    #return h as this above
-    
-    # ef = (t>=0)*(t<=tmeoff)*fldamp*jnp.sin(fldfrq*t)
-    # hfieldAO = ef*jnp.sum(norm_direc[:,None,None]*didat, axis=0, dtype=jnp.complex128)
-    # h -= xmat.conj().T @ hfieldAO @ xmat
-    
-    #return jnp.concatenate([symmetrized_real.flatten(),antisymmetrized_imag.flatten()])
     return symmetrized_real, antisymmetrized_imag
 
 
 MLham = hk.transform(MLhamNN)
 MLham = hk.without_apply_rng(MLham)
 rng = random.PRNGKey(42)
-#import pdb;pdb.set_trace()
-#took out time
 params = MLham.init(rng, allden[0][0,:,:].reshape((-1)).real,allden[0][0,:,:].reshape((-1)).imag)
 numparams = len(flattener(params))
 print('numparams: ', numparams)
+
 mydHdtheta = jacobian(MLham.apply, 0)
-#mydHdt= jacobian(MLham.apply, 1)
 mydHdX = jacobian(MLham.apply, 1)
 mydHdY = jacobian(MLham.apply,2)
-# mydHdfldfrq = jacobian(MLham.apply, 3)
-# mydHdfldamp = jacobian(MLham.apply, 4)
-# mydHdtmeoff = jacobian(MLham.apply, 5)
-# mydHdnorm_direc = jacobian(MLham.apply, 6)
 
 def expderiv(d, u, w):
     offdiagmask = jnp.ones((m, m)) - jnp.eye(m)
@@ -271,25 +256,22 @@ def expderiv3(d, u, w):
     s1, s2 = jnp.meshgrid(d, d)
     denom = offdiagmask * (s1 - s2) + jnp.eye(m)
     mask = offdiagmask * (e1 - e2)/denom + jnp.diag(expspec)
-    #import pdb;pdb.set_trace()
     weights = jnp.concatenate([gradflattener(w[0]), gradflattener(w[1])]).T
+    #modified einsum here
     prederivamat = jnp.einsum('ij,abjk,kl->ilab',u.conj().T,weights.reshape(numparams,drc,drc,drc),u) 
     #prederivamat = jnp.einsum('ij,abcdjk,kl->ilabcd',u.conj().T,w,u) 
+    #modified einsum here
     derivamat = jnp.einsum('ilab,il->ilab',prederivamat,mask)
+    #modified einsum here
     return jnp.einsum('ij,jkab,kl->ila',u,derivamat,u.conj().T)
 
 def xicomp(hkparams, x, y, evals, evecs):
-    # x = jnp.real(p).astype(jnp.float64)
-    # y = jnp.imag(p).astype(jnp.float64)
-    #replace w automatic differentiation
-    #slap in jacobian calls here
     jacR = mydHdX(hkparams, x, y)
     jacI =  mydHdY(hkparams, x, y)
-    dHdp = 0.5 * ((jacR[0] + jacR[1]) - 1j*(jacI[0] -1j*jacI[1]))
-    dHdPbar = 0.5 * ((jacR[0] + jacR[1]) + 1j*(jacI[0] -1j*jacI[1]))
+    dHdp = 0.5 * ((jacR[0] + 1j*jacR[1]) - 1j*(jacI[0] -1j*jacI[1]))
+    dHdPbar = 0.5 * ((jacR[0] + 1j*jacR[1]) + 1j*(jacI[0] -1j*jacI[1]))
     dHdp = dHdp.reshape((drc,drc,drc,drc))
     dHdPbar = dHdPbar.reshape((drc,drc,drc,drc))
- 
     jacP = expderiv2(evals, evecs, dHdp)
     jacPbar = expderiv2(evals, evecs, dHdPbar)
     return jacP, jacPbar
@@ -300,10 +282,8 @@ def dUdtheta(hkparams, x, y, evals, evecs):
 
     # beta1 = theta[:drc**4].reshape((drc**2, drc**2))
     # gamma1 = theta[drc**4:].reshape((drc**2, drc**2))
-    #replace w automatic differentiation
     # dHdtheta = 0.5*jnp.einsum('ab,ck,dl->abcdkl',x.reshape((drc,drc)),jnp.eye(drc),jnp.eye(drc))
     # dHdtheta += 0.5*jnp.einsum('ab,cl,dk->abcdkl',x.reshape((drc,drc)),jnp.eye(drc),jnp.eye(drc))
-    #slap in calls to jacobian here
     
 #     jacbeta = expderiv3(evals, evecs, dHdtheta)
     
@@ -319,9 +299,6 @@ def adjgrad(hkparams, Ptilde, tmeoff, fldfrq, fldamp, norm_direc):
     tvec = dt*jnp.arange(ntvec)
     P0 = Ptilde[0,:,:]
     propagated_dens = [P0]
-    # H0 = MLham.apply(hkparams,P0.real,P0.imag)
-    # H0real, H0imag = H0[0:drc**2], H0[drc**2:]
-    # H0 = H0real.reshape((drc,drc)) + H0imag.reshape((drc,drc))
     H0 = MLham.apply(hkparams,P0.real,P0.imag)
     H0 = H0[0] + 1j*H0[1]
     evals, evecs = jnp.linalg.eigh(H0)
@@ -333,9 +310,6 @@ def adjgrad(hkparams, Ptilde, tmeoff, fldfrq, fldamp, norm_direc):
         dl, dvals, dvecs, dU = dtup
         P0 = dl[i, :, :]
         P1 = dl[i+1, :, :]
-        # H1 = MLham.apply(hkparams,P1.real,P1.imag)
-        # H1real, H1imag = H1[0:drc**2], H1[drc**2:]
-        # H1 = H1real.reshape((drc,drc)) + H1imag.reshape((drc,drc))
         H1 = MLham.apply(hkparams,P1.real,P1.imag)
         H1 = H1[0] + 1j*H1[1]
         evals, evecs = jnp.linalg.eigh(H1)
@@ -386,7 +360,7 @@ def adjgrad(hkparams, Ptilde, tmeoff, fldfrq, fldamp, norm_direc):
         return gL + jnp.real(jnp.einsum('il,ila->a',lambstack[k],(term1+term2).conj()))
     # 
     tmp1 = -1j*dt*(dUdtheta(hkparams, Pstack[0].real,  Pstack[0].imag, 1j*dt*allevals[0], allevecs[0]))
-    #import pdb;pdb.set_trace()
+    #modified einsum here
     term1 = jnp.einsum('ija,jk,kl->ila',tmp1,Pstack[0],allU[0].conj().T)
     term2 = term1.transpose((1,0,2)).conj()
     initgradL = jnp.real(jnp.einsum('il,ila->a',lambstack[0],(term1+term2).conj()))
@@ -397,10 +371,6 @@ def MMUT_Prop_HSB(hkparams, initial_density, tmeoff=1, fldfrq=1, fldamp=1, norm_
     tvec = dt*jnp.arange(ntvec)
     P0 = initial_density.reshape((drc, drc))
     propagated_dens = [P0]
-    #import pdb; pdb.set_trace()
-    # H0 = MLham.apply(hkparams,P0.real,P0.imag)
-    # H0real, H0imag = H0[0:drc**2], H0[drc**2:]
-    # H0 = H0real.reshape((drc,drc)) + H0imag.reshape((drc,drc))
     H0 = MLham.apply(hkparams,P0.real,P0.imag)
     H0 = H0[0] + 1j*H0[1]
     evals, evecs = jnp.linalg.eigh(H0)
@@ -410,9 +380,6 @@ def MMUT_Prop_HSB(hkparams, initial_density, tmeoff=1, fldfrq=1, fldamp=1, norm_
     def bodyfun(i, dl):
         P0 = dl[i, :, :]
         P1 = dl[i+1, :, :]
-        # H1 = MLham.apply(hkparams,P1.real,P1.imag)
-        # H1real, H1imag = H1[0:drc**2], H1[drc**2:]
-        # H1 = H1real.reshape((drc,drc)) + H1imag.reshape((drc,drc))
         H1 = MLham.apply(hkparams,P1.real,P1.imag)
         H1 = H1[0] + 1j*H1[1]
         evals, evecs = jnp.linalg.eigh(H1)
@@ -437,14 +404,14 @@ def loss(hkparams, thisden, thistmeoff, thisfrq, thisamp, thisdirec):
 jloss = jit(loss)
 jadjgrad = jit(adjgrad)
 
-aggloss = vmap(loss, in_axes=(None,0,0,0,0,0), out_axes=0)
-jaggloss = jit(aggloss)
+jaggloss = soft_pmap(loss, in_axes=(None,0,0,0,0,0))
+#jaggloss = jit(aggloss)
 
-aggadjgrad = vmap(adjgrad, in_axes=(None,0,0,0,0,0), out_axes=0)
-jaggadjgrad = jit(aggadjgrad)
+jaggadjgrad = soft_pmap(adjgrad, in_axes=(None,0,0,0,0,0))
+#jaggadjgrad = jit(aggadjgrad)
 
 # define the training set
-trnind = np.arange(45,56,dtype=np.int16)
+trnind = np.arange(45,57,dtype=np.int16)
 #trnind = np.arange(0,4,dtype=np.int16)
 trnden = np.stack(allden)[trnind]
 trntme = np.stack(alltme)[trnind]
@@ -488,12 +455,12 @@ plt.close()
 
 # WRAPPERS TO ENABLE USE OF SCIPY OPTIMIZERS
 def siobj(x):
-    jx = jnp.array(x)
-    return np.mean(jaggloss(jx,jtrnden,jtrntme,jtrnfrq,jtrnamp,jtrnnd))
+    hkparams = populator(params, np.array(x))
+    return np.mean(jaggloss(hkparams,jtrnden,jtrntme,jtrnfrq,jtrnamp,jtrnnd))
 
 def sigrad(x):
-    jx = jnp.array(x)
-    thisgrad = jaggadjgrad(jx,jtrnden,jtrntme,jtrnfrq,jtrnamp,jtrnnd)
+    hkparams = populator(params, np.array(x))
+    thisgrad = jaggadjgrad(hkparams,jtrnden,jtrntme,jtrnfrq,jtrnamp,jtrnnd)
     return np.array(jnp.mean( thisgrad, axis=0 ))
 
 # UNCOMMENT THE FOLLOWING BLOCK IF YOU WISH TO unit test the adjoint method
@@ -527,9 +494,9 @@ def sigrad(x):
 # trainedtheta = res.x
 ######################################################################
 
-# UNCOMMENT THE FOLLOWING BLOCK IF YOU WISH TO USE L-BFGS-B
+#UNCOMMENT THE FOLLOWING BLOCK IF YOU WISH TO USE L-BFGS-B
 # res = scipy.optimize.minimize( siobj, 
-#                                x0 = theta0,
+#                                x0 = np.array(flattener(params)),
 #                                method = 'L-BFGS-B',
 #                                jac = sigrad,
 #                                options = {'iprint': 1, 'ftol': 1e-30, 'gtol': 1e-30} )
@@ -577,7 +544,7 @@ def fit(params: optax.Params, optimizer: optax.GradientTransformation, nfs, disp
     
     return params
 
-optimizer = optax.fromage(learning_rate=5e-4)
+optimizer = optax.fromage(learning_rate=1e-6)
 opt_state = optimizer.init(flattener(params))
 trainedtheta = fit(flattener(params), optimizer, 10000, 1, 10)
 ######################################################################
