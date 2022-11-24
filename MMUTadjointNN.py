@@ -256,20 +256,20 @@ def expderiv3(d, u, w):
     s1, s2 = jnp.meshgrid(d, d)
     denom = offdiagmask * (s1 - s2) + jnp.eye(m)
     mask = offdiagmask * (e1 - e2)/denom + jnp.diag(expspec)
-    weights = jnp.concatenate([gradflattener(w[0]), gradflattener(w[1])]).T
+    #weights = jnp.concatenate([gradflattener(w[0]), gradflattener(w[1])]).T
     #modified einsum here
-    prederivamat = jnp.einsum('ij,abjk,kl->ilab',u.conj().T,weights.reshape(numparams,drc,drc,drc),u) 
+    prederivamat = jnp.einsum('ij,ajk,kl->ila',u.conj().T,gradflattener(w).reshape(numparams,drc,drc),u) 
     #prederivamat = jnp.einsum('ij,abcdjk,kl->ilabcd',u.conj().T,w,u) 
     #modified einsum here
-    derivamat = jnp.einsum('ilab,il->ilab',prederivamat,mask)
+    derivamat = jnp.einsum('ila,il->ila',prederivamat,mask)
     #modified einsum here
-    return jnp.einsum('ij,jkab,kl->ila',u,derivamat,u.conj().T)
+    return jnp.einsum('ij,jka,kl->ila',u,derivamat,u.conj().T)
 
 def xicomp(hkparams, x, y, evals, evecs):
     jacR = mydHdX(hkparams, x, y)
     jacI =  mydHdY(hkparams, x, y)
-    dHdp = 0.5 * ((jacR[0] + 1j*jacR[1]) - 1j*(jacI[0] -1j*jacI[1]))
-    dHdPbar = 0.5 * ((jacR[0] + 1j*jacR[1]) + 1j*(jacI[0] -1j*jacI[1]))
+    dHdp = 0.5 * ((jacR[0] + 1j*jacR[1]) - 1j*(jacI[0] +1j*jacI[1]))
+    dHdPbar = 0.5 * ((jacR[0] + 1j*jacR[1]) + 1j*(jacI[0] +1j*jacI[1]))
     dHdp = dHdp.reshape((drc,drc,drc,drc))
     dHdPbar = dHdPbar.reshape((drc,drc,drc,drc))
     jacP = expderiv2(evals, evecs, dHdp)
@@ -293,7 +293,11 @@ def dUdtheta(hkparams, x, y, evals, evecs):
     
 #     tmp = [jacbeta.reshape((drc,drc,drc**4)), jacgamma.reshape((drc,drc,drc**4))]
 #     return jnp.concatenate(tmp, axis=2)
-    return expderiv3(evals, evecs, mydHdtheta(hkparams, x, y))
+    dHdtheta =  mydHdtheta(hkparams, x, y)
+   # import pdb; pdb.set_trace()
+    tm1 = expderiv3(evals, evecs,dHdtheta[0])
+    tm2 = expderiv3(evals, evecs,dHdtheta[1])
+    return tm1+tm2
 
 def adjgrad(hkparams, Ptilde, tmeoff, fldfrq, fldamp, norm_direc):
     tvec = dt*jnp.arange(ntvec)
@@ -360,7 +364,6 @@ def adjgrad(hkparams, Ptilde, tmeoff, fldfrq, fldamp, norm_direc):
         return gL + jnp.real(jnp.einsum('il,ila->a',lambstack[k],(term1+term2).conj()))
     # 
     tmp1 = -1j*dt*(dUdtheta(hkparams, Pstack[0].real,  Pstack[0].imag, 1j*dt*allevals[0], allevecs[0]))
-    #modified einsum here
     term1 = jnp.einsum('ija,jk,kl->ila',tmp1,Pstack[0],allU[0].conj().T)
     term2 = term1.transpose((1,0,2)).conj()
     initgradL = jnp.real(jnp.einsum('il,ila->a',lambstack[0],(term1+term2).conj()))
@@ -447,7 +450,7 @@ ic = allden[i][0,:,:].reshape((-1))
 print('propagating trajectory: {}'.format(allfld[0]))
 #thetatrue = jnp.concatenate([beta1true.reshape((-1)), gamma1true.reshape((-1))])
 mlprop = MMUT_Prop_HSB(params, ic, tmeoff=alltme[i], fldfrq=allfrq[i], fldamp=allamp[i])
-
+import pdb;pdb.set_trace()
 plt.plot(jnp.real(mlprop[:,0,0]),color='red')
 plt.plot(jnp.real(allden[i][:mynumsteps+1,0,0]),color='black')
 plt.savefig('pretrain.pdf')
