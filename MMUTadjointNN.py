@@ -50,7 +50,7 @@ amplst = [0.005, 0.05, 0.5]
 a = list(flddct.keys())        
 
 allfld, allfrq, allamp, alltme, norm_direc = [], [], [], [], []
-nalltraj = 100
+nalltraj = 10
 for i in range(nalltraj):
     ampj = 0.05
     allfld.append(a[0]+'='+str(ampj))
@@ -257,12 +257,8 @@ def expderiv3(d, u, w):
     denom = offdiagmask * (s1 - s2) + jnp.eye(m)
     mask = offdiagmask * (e1 - e2)/denom + jnp.diag(expspec)
     #weights = jnp.concatenate([gradflattener(w[0]), gradflattener(w[1])]).T
-    #modified einsum here
     prederivamat = jnp.einsum('ij,ajk,kl->ila',u.conj().T,gradflattener(w).reshape(numparams,drc,drc),u) 
-    #prederivamat = jnp.einsum('ij,abcdjk,kl->ilabcd',u.conj().T,w,u) 
-    #modified einsum here
     derivamat = jnp.einsum('ila,il->ila',prederivamat,mask)
-    #modified einsum here
     return jnp.einsum('ij,jka,kl->ila',u,derivamat,u.conj().T)
 
 def xicomp(hkparams, x, y, evals, evecs):
@@ -277,27 +273,11 @@ def xicomp(hkparams, x, y, evals, evecs):
     return jacP, jacPbar
 
 def dUdtheta(hkparams, x, y, evals, evecs):
-    # x = jnp.real(p)
-    # y = jnp.imag(p)
-
-    # beta1 = theta[:drc**4].reshape((drc**2, drc**2))
-    # gamma1 = theta[drc**4:].reshape((drc**2, drc**2))
-    # dHdtheta = 0.5*jnp.einsum('ab,ck,dl->abcdkl',x.reshape((drc,drc)),jnp.eye(drc),jnp.eye(drc))
-    # dHdtheta += 0.5*jnp.einsum('ab,cl,dk->abcdkl',x.reshape((drc,drc)),jnp.eye(drc),jnp.eye(drc))
-    
-#     jacbeta = expderiv3(evals, evecs, dHdtheta)
-    
-#     dHdtheta = 0.5j*jnp.einsum('ab,ck,dl->abcdkl',y.reshape((drc,drc)),jnp.eye(drc),jnp.eye(drc))
-#     dHdtheta -= 0.5j*jnp.einsum('ab,cl,dk->abcdkl',y.reshape((drc,drc)),jnp.eye(drc),jnp.eye(drc))
-#     jacgamma = expderiv3(evals, evecs, dHdtheta)
-    
-#     tmp = [jacbeta.reshape((drc,drc,drc**4)), jacgamma.reshape((drc,drc,drc**4))]
-#     return jnp.concatenate(tmp, axis=2)
     dHdtheta =  mydHdtheta(hkparams, x, y)
-   # import pdb; pdb.set_trace()
-    tm1 = expderiv3(evals, evecs,dHdtheta[0])
-    tm2 = expderiv3(evals, evecs,dHdtheta[1])
-    return tm1+tm2
+    #import pdb; pdb.set_trace()
+    tm1 = expderiv3(evals, evecs, dHdtheta[0])
+    tm2 = expderiv3(evals, evecs, dHdtheta[1])
+    return tm1 + 1j*tm2
 
 def adjgrad(hkparams, Ptilde, tmeoff, fldfrq, fldamp, norm_direc):
     tvec = dt*jnp.arange(ntvec)
@@ -414,8 +394,8 @@ jaggadjgrad = soft_pmap(adjgrad, in_axes=(None,0,0,0,0,0))
 #jaggadjgrad = jit(aggadjgrad)
 
 # define the training set
-trnind = np.arange(45,57,dtype=np.int16)
-#trnind = np.arange(0,4,dtype=np.int16)
+#trnind = np.arange(45,57,dtype=np.int16)
+trnind = np.arange(0,4,dtype=np.int16)
 trnden = np.stack(allden)[trnind]
 trntme = np.stack(alltme)[trnind]
 trnfrq = np.stack(allfrq)[trnind]
@@ -450,7 +430,6 @@ ic = allden[i][0,:,:].reshape((-1))
 print('propagating trajectory: {}'.format(allfld[0]))
 #thetatrue = jnp.concatenate([beta1true.reshape((-1)), gamma1true.reshape((-1))])
 mlprop = MMUT_Prop_HSB(params, ic, tmeoff=alltme[i], fldfrq=allfrq[i], fldamp=allamp[i])
-import pdb;pdb.set_trace()
 plt.plot(jnp.real(mlprop[:,0,0]),color='red')
 plt.plot(jnp.real(allden[i][:mynumsteps+1,0,0]),color='black')
 plt.savefig('pretrain.pdf')
@@ -467,11 +446,11 @@ def sigrad(x):
     return np.array(jnp.mean( thisgrad, axis=0 ))
 
 # UNCOMMENT THE FOLLOWING BLOCK IF YOU WISH TO unit test the adjoint method
-# jaxgradloss = grad(loss, 0)
-# jaxres = jaxgradloss(theta0, allden[0], alltme[0], allfrq[0], allamp[0], norm_direc[0])
-# myres = jadjgrad(theta0, allden[0], alltme[0], allfrq[0], allamp[0], norm_direc[0])
-# print('|| adjgrad - jaxgrad ||:')
-# print(jnp.linalg.norm(jaxres - myres))
+jaxgradloss = grad(loss, 0)
+jaxres = jaxgradloss(params, allden[0], alltme[0], allfrq[0], allamp[0], norm_direc[0])
+myres = jadjgrad(params, allden[0], alltme[0], allfrq[0], allamp[0], norm_direc[0])
+print('|| adjgrad - jaxgrad ||:')
+print(jnp.linalg.norm(jaxres - myres))
 
 # check loss (before training) against loss evaluated at true theta
 #print('pretraining loss value: ' + str(siobj(theta0)))
