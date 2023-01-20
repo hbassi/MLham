@@ -13,13 +13,13 @@ import matplotlib.pyplot as plt
 import scipy.optimize
 import optax
 import time
-import haiku as hk
+#import haiku as hk
 
 mol = 'heh+'
 basis = 'sto-3g'
 init = 'hf'
 td = 'rt-tdexx'
-
+drc = 2
 dt = 0.08268
 
 inpath = './datafiles'
@@ -50,7 +50,7 @@ amplst = [0.005, 0.05, 0.5]
 a = list(flddct.keys())        
 
 allfld, allfrq, allamp, alltme, norm_direc = [], [], [], [], []
-nalltraj = 10
+nalltraj = 58
 for i in range(nalltraj):
     ampj = 0.05
     allfld.append(a[0]+'='+str(ampj))
@@ -97,8 +97,8 @@ for i in allfld:
     allden.append(p_all_oi)
     ii += 1
 
-m = drc
 
+#import pdb; pdb.set_trace()
 # pars_file = saved_model_dir + "savedparams.npz"
 # thetastar = np.load(pars_file, allow_pickle=True)['arr_0']
 # thetastar = 1e-2 * np.random.normal(size=2*drc**4)
@@ -153,7 +153,10 @@ thetatrue = jnp.concatenate([beta1true.reshape((-1)), gamma1true.reshape((-1))])
 # print("END CHECK")
 
 
-
+m = drc
+print('reading new data')
+allden = np.load('tdci_training_data.npy')
+print('done reading new data')
 #============================================================================================================#
 def flattener(td):
     alldata = []
@@ -238,9 +241,9 @@ def MLhamNN(theta,x,y): #t, fldfrq,fldamp,tmeoff,norm_direc):
     bias.append( theta[si:ei] )
     inplyr = jnp.array( jnp.concatenate([x.flatten(), y.flatten()]))
     #import pdb;pdb.set_trace()
-    h1 = jax.nn.selu( inplyr @ filt[0] + bias[0] )
-    h2 = jax.nn.selu( h1 @ filt[1] + bias[1] )
-    h3 = jax.nn.selu( h2 @ filt[2] + bias[2] )
+    h1 = jax.nn.tanh( inplyr @ filt[0] + bias[0] )
+    h2 = jax.nn.tanh( h1 @ filt[1] + bias[1] )
+    h3 = jax.nn.tanh( h2 @ filt[2] + bias[2] )
     h4 = h3 @ filt[3] + bias[3]
     hreal = h4[0:drc**2]
     himag = h4[drc**2:]
@@ -283,7 +286,6 @@ def expderiv3(d, u, w):
     s1, s2 = jnp.meshgrid(d, d)
     denom = offdiagmask * (s1 - s2) + jnp.eye(m)
     mask = offdiagmask * (e1 - e2)/denom + jnp.diag(expspec)
-    #weights = jnp.concatenate([gradflattener(w[0]), gradflattener(w[1])]).T
     prederivamat = jnp.einsum('ij,jka,kl->ila',u.conj().T,w,u) 
     derivamat = jnp.einsum('ila,il->ila',prederivamat,mask)
     return jnp.einsum('ij,jka,kl->ila',u,derivamat,u.conj().T)
@@ -291,8 +293,8 @@ def expderiv3(d, u, w):
 def xicomp(theta, x, y, evals, evecs):
     jacR = mydHdX(theta, x, y)
     jacI =  mydHdY(theta, x, y)
-    dHdp = 0.5 * ((jacR[0] + 1j*jacR[1]) - 1j*(jacI[0] +1j*jacI[1]))
-    dHdPbar = 0.5 * ((jacR[0] + 1j*jacR[1]) + 1j*(jacI[0] +1j*jacI[1]))
+    dHdp = 0.5 * ((jacR[0] + 1.0j*jacR[1]) - 1.0j*(jacI[0] +1.0j*jacI[1]))
+    dHdPbar = 0.5 * ((jacR[0] + 1.0j*jacR[1]) + 1.0j*(jacI[0] +1.0j*jacI[1]))
     dHdp = dHdp.reshape((drc,drc,drc,drc))
     dHdPbar = dHdPbar.reshape((drc,drc,drc,drc))
     jacP = expderiv2(evals, evecs, dHdp)
@@ -301,19 +303,18 @@ def xicomp(theta, x, y, evals, evecs):
 
 def dUdtheta(theta, x, y, evals, evecs):
     dHdtheta =  mydHdtheta(theta, x, y)
-    #import pdb; pdb.set_trace()
     tm1 = expderiv3(evals, evecs, dHdtheta[0])
     tm2 = expderiv3(evals, evecs, dHdtheta[1])
-    return tm1 -1j*tm2
+    return tm1 + 1j*tm2
 
 def adjgrad(theta, Ptilde, tmeoff, fldfrq, fldamp, norm_direc):
     tvec = dt*jnp.arange(ntvec)
     P0 = Ptilde[0,:,:]
     propagated_dens = [P0]
-    H0 = MLhamNN(theta,P0.real,P0.imag)
-    H0 = H0[0] + 1j*H0[1]
+    H0 = MLhamNN(theta, P0.real, P0.imag)
+    H0 = H0[0] + 1.0j*H0[1]
     evals, evecs = jnp.linalg.eigh(H0)
-    U0 = evecs @ jnp.diag(jnp.exp(-1j*dt*evals)) @ evecs.conj().T
+    U0 = evecs @ jnp.diag(jnp.exp(-1.0j*dt*evals)) @ evecs.conj().T
     P1 = U0 @ P0 @ U0.conj().T
     propagated_dens.append( P1 )
     # 
@@ -322,7 +323,7 @@ def adjgrad(theta, Ptilde, tmeoff, fldfrq, fldamp, norm_direc):
         P0 = dl[i, :, :]
         P1 = dl[i+1, :, :]
         H1 = MLhamNN(theta,P1.real,P1.imag)
-        H1 = H1[0] + 1j*H1[1]
+        H1 = H1[0] + 1.0j*H1[1]
         evals, evecs = jnp.linalg.eigh(H1)
         dvals = dvals.at[i+1].set( evals )
         dvecs = dvecs.at[i+1].set( evecs )
@@ -370,7 +371,7 @@ def adjgrad(theta, Ptilde, tmeoff, fldfrq, fldamp, norm_direc):
         term2 = term1.transpose((1,0,2)).conj()
         return gL + jnp.real(jnp.einsum('il,ila->a',lambstack[k],(term1+term2).conj()))
     # 
-    tmp1 = -1j*dt*(dUdtheta(theta, Pstack[0].real,  Pstack[0].imag, 1j*dt*allevals[0], allevecs[0]))
+    tmp1 = -1j*dt*(dUdtheta(theta, Pstack[0].real,  Pstack[0].imag, -1j*dt*allevals[0], allevecs[0]))
     term1 = jnp.einsum('ija,jk,kl->ila',tmp1,Pstack[0],allU[0].conj().T)
     term2 = term1.transpose((1,0,2)).conj()
     initgradL = jnp.real(jnp.einsum('il,ila->a',lambstack[0],(term1+term2).conj()))
@@ -381,17 +382,17 @@ def MMUT_Prop_HSB(theta, initial_density, tmeoff=1, fldfrq=1, fldamp=1, norm_dir
     tvec = dt*jnp.arange(ntvec)
     P0 = initial_density.reshape((drc, drc))
     propagated_dens = [P0]
-    H0 = MLhamNN(theta,P0.real,P0.imag)
-    H0 = H0[0] + 1j*H0[1]
+    H0 = MLhamNN(theta, P0.real, P0.imag)
+    H0 = H0[0] + 1.0j*H0[1]
     evals, evecs = jnp.linalg.eigh(H0)
-    U0 = evecs @ jnp.diag(jnp.exp(-1j*dt*evals)) @ evecs.conj().T
+    U0 = evecs @ jnp.diag(jnp.exp(-1.0j*dt*evals)) @ evecs.conj().T
     P1 = U0 @ P0 @ U0.conj().T
     propagated_dens.append( P1 )
     def bodyfun(i, dl):
         P0 = dl[i, :, :]
         P1 = dl[i+1, :, :]
-        H1 = MLhamNN(theta,P1.real,P1.imag)
-        H1 = H1[0] + 1j*H1[1]
+        H1 = MLhamNN(theta, P1.real, P1.imag)
+        H1 = H1[0] + 1.0j*H1[1]
         evals, evecs = jnp.linalg.eigh(H1)
         U1 = evecs @ jnp.diag(jnp.exp(-2j*dt*evals)) @ evecs.conj().T
         P2 = U1 @ P0 @ U1.conj().T
@@ -414,15 +415,21 @@ def loss(theta, thisden, thistmeoff, thisfrq, thisamp, thisdirec):
 jloss = jit(loss)
 jadjgrad = jit(adjgrad)
 
-jaggloss = soft_pmap(loss, in_axes=(None,0,0,0,0,0))
+aggloss = vmap(loss, in_axes=(None,0,0,0,0,0), out_axes=0)
+jaggloss = jit(aggloss)
+
+aggadjgrad = vmap(adjgrad, in_axes=(None,0,0,0,0,0), out_axes=0)
+jaggadjgrad = jit(aggadjgrad)
+
+#jaggloss = soft_pmap(loss, in_axes=(None,0,0,0,0,0))
 #jaggloss = jit(aggloss)
 
-jaggadjgrad = soft_pmap(adjgrad, in_axes=(None,0,0,0,0,0))
+#jaggadjgrad = soft_pmap(adjgrad, in_axes=(None,0,0,0,0,0))
 #jaggadjgrad = jit(aggadjgrad)
 
 # define the training set
-#trnind = np.arange(45,57,dtype=np.int16)
-trnind = np.arange(0,4,dtype=np.int16)
+trnind = np.arange(45,57,dtype=np.int16)
+#trnind = np.arange(0,12,dtype=np.int16)
 trnden = np.stack(allden)[trnind]
 trntme = np.stack(alltme)[trnind]
 trnfrq = np.stack(allfrq)[trnind]
@@ -466,19 +473,19 @@ plt.close()
 
 # WRAPPERS TO ENABLE USE OF SCIPY OPTIMIZERS
 def siobj(x):
-    hkparams = populator(params, np.array(x))
-    return np.mean(jaggloss(hkparams,jtrnden,jtrntme,jtrnfrq,jtrnamp,jtrnnd))
+    #hkparams = populator(params, np.array(x))
+    return np.mean(jaggloss(theta0,jtrnden,jtrntme,jtrnfrq,jtrnamp,jtrnnd))
 
 def sigrad(x):
-    hkparams = populator(params, np.array(x))
-    thisgrad = jaggadjgrad(hkparams,jtrnden,jtrntme,jtrnfrq,jtrnamp,jtrnnd)
+    #hkparams = populator(params, np.array(x))
+    thisgrad = jaggadjgrad(theta0,jtrnden,jtrntme,jtrnfrq,jtrnamp,jtrnnd)
     return np.array(jnp.mean( thisgrad, axis=0 ))
 
 # UNCOMMENT THE FOLLOWING BLOCK IF YOU WISH TO unit test the adjoint method
 jaxgradloss = grad(loss, 0)
 jaxres = jaxgradloss(theta0, allden[0], alltme[0], allfrq[0], allamp[0], norm_direc[0])
 myres = jadjgrad(theta0, allden[0], alltme[0], allfrq[0], allamp[0], norm_direc[0])
-import pdb;pdb.set_trace()
+#import pdb;pdb.set_trace()
 print('|| adjgrad - jaxgrad ||:')
 print(jnp.linalg.norm(jaxres - myres))
 
@@ -508,7 +515,7 @@ print(jnp.linalg.norm(jaxres - myres))
 
 #UNCOMMENT THE FOLLOWING BLOCK IF YOU WISH TO USE L-BFGS-B
 # res = scipy.optimize.minimize( siobj, 
-#                                x0 = np.array(flattener(params)),
+#                                x0 = np.array(theta0),
 #                                method = 'L-BFGS-B',
 #                                jac = sigrad,
 #                                options = {'iprint': 1, 'ftol': 1e-30, 'gtol': 1e-30} )
@@ -554,7 +561,7 @@ def fit(params: optax.Params, optimizer: optax.GradientTransformation, nfs, disp
     
     return params
 
-optimizer = optax.fromage(learning_rate=1e-3)
+optimizer = optax.fromage(learning_rate=1e-4)
 opt_state = optimizer.init(jnp.array(theta0))
 trainedtheta = fit(jnp.array(theta0), optimizer, 10000, 1, 10)
 ######################################################################
