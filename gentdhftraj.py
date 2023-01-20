@@ -39,15 +39,26 @@ def MMUT_Prop(hamfunc, initial_density, dt=0.08268, ntvec=2000, dilfac=1,
     return np.stack(propagated_dens).reshape((-1,drc,drc))
 
 # propagation
-mynumsteps = 20000
+mynumsteps = 20001
 print(f'Propagating for {mynumsteps} steps...',flush=True)
-
-# training data
-ic = np.array([[1.0, 1.0j], [-1.0j, 1.0]]).reshape((-1))
-print('')
-print('propagating trajectory')
-exprop = MMUT_Prop(EXham, ic, dt=dt, ntvec=mynumsteps)
-fname=outpath+'testp2.npz'
-print(fname)
-np.savez(fname, traj=exprop.reshape((-1,drc,drc)))
-print('')
+trajs = []
+for i in range(100):     
+    # training data
+    N = 2
+    # ic = np.random.normal(size=(N,N)) + 1.0j*np.random.normal(size=(N,N))
+    # ic_herm = 0.5*(ic + ic.conj().T)
+    # ic_herm = ic_herm.reshape((-1))
+    N = 2
+    ic = np.random.normal(size=(N,N))
+    ic_herm = (ic + ic.T)/2
+    ic_herm = ic_herm.flatten()
+    print('')
+    print('propagating trajectory')
+    exprop = MMUT_Prop(EXham, ic_herm, dt=dt, ntvec=mynumsteps)
+    fname=outpath+'traj_'+str(i)+'.npz'
+    print(fname)
+    np.savez(fname, traj=exprop.reshape((-1,drc,drc)))
+    trajs.append(exprop.reshape((-1,drc,drc)))
+    print('')
+with open('nonlinearham.npz','wb') as f:
+    np.save(f, np.array(trajs))
