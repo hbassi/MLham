@@ -16,44 +16,13 @@ import time
 #import haiku as hk
 
 
-nalltraj = 58
-offset = 0
-mmut_freq = 100
-cleanup = True
-tprop = 19802
-dt = 0.08268/10
 
+dt = 0.08268/10
 mynumsteps = 4000
 #mynumsteps = 19999
 ntvec = mynumsteps
 
-#td_name = allfld[0]
 drc = 2
-
-# need two masks
-# upper mask is matrix whose (u,v)-th element is 0 unless u <= v
-# lower mask is matrix whose (u,v)-th element is 0 unless u > v
-upper = np.zeros((2,2),dtype=np.float64)
-lower = np.zeros((2,2),dtype=np.float64)
-for u in range(2):
-    for v in range(2):
-        if u <= v:
-            upper[u,v] = 1.0
-        if u > v:
-            lower[u,v] = 1.0
-
-
-# cmdbeta0 = np.load('cmdbeta0.npz')['beta0']
-# cmdbeta1 = np.load('cmdbeta1.npz')['beta1']
-# cmdgamma0 = np.load('cmdgamma0.npz')['gamma0']
-# cmdgamma1 = np.load('cmdgamma1.npz')['gamma1']
-
-# print("CHECKING EXACT BETAs and GAMMAs:")
-# print(np.linalg.norm(cmdbeta0 - beta0true))
-# print(np.linalg.norm(cmdbeta1 - beta1true))
-# print(np.linalg.norm(cmdgamma0 - gamma0true))
-# print(np.linalg.norm(cmdgamma1 - gamma1true))
-# print("END CHECK")
 
 
 m = drc
@@ -285,7 +254,7 @@ jaggadjgrad = jit(aggadjgrad)
 #jaggadjgrad = jit(aggadjgrad)
 
 # define the training set
-trnind = np.arange(45,57,dtype=np.int16)
+trnind = np.arange(0,6,dtype=np.int16)
 #trnind = np.arange(0,12,dtype=np.int16)
 trnden = np.stack(allden)[trnind]
 jtrnden = jnp.array(trnden)
@@ -313,7 +282,8 @@ ic = allden[i][0,:,:].reshape((-1))
 print('propagating trajectory:')# {}'.format(allfld[0]))
 #thetatrue = jnp.concatenate([beta1true.reshape((-1)), gamma1true.reshape((-1))])
 rng = np.random.default_rng(seed=42)
-theta0 = 0.6*rng.standard_normal(size=numparams) - 0.3
+#theta0 = 0.6*rng.standard_normal(size=numparams) - 0.3
+theta0= np.load('optaxADJMMUTtheta.npz')['trainedtheta']
 mlprop = MMUT_Prop_HSB(theta0, ic)
 plt.plot(jnp.real(mlprop[:,0,0]),color='red')
 plt.plot(jnp.real(allden[i][:mynumsteps+1,0,0]),color='black')
@@ -404,13 +374,13 @@ def fit(params: optax.Params, optimizer: optax.GradientTransformation, nfs, disp
             loss_value = myobj(params)
             print(f'step {i}, loss: {loss_value}')
         if i % saveint == 0:
-            np.savez('optaxADJMMUTtheta.npz',trainedtheta=params)
-            with open("optaxADJMMUTloss.txt",'a',encoding = 'utf-8') as f:
+            np.savez('optaxADJMMUTtheta_2.npz',trainedtheta=params)
+            with open("optaxADJMMUTloss_2.txt",'a',encoding = 'utf-8') as f:
                 f.write(f'step {i}, loss: {loss_value}\n')
     
     return params
 
-optimizer = optax.fromage(learning_rate=1e-4)
+optimizer = optax.fromage(learning_rate=1e-5)
 opt_state = optimizer.init(jnp.array(theta0))
 trainedtheta = fit(jnp.array(theta0), optimizer, 10000, 1, 10)
 ######################################################################

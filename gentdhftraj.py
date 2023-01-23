@@ -48,10 +48,15 @@ for i in range(100):
     # ic = np.random.normal(size=(N,N)) + 1.0j*np.random.normal(size=(N,N))
     # ic_herm = 0.5*(ic + ic.conj().T)
     # ic_herm = ic_herm.reshape((-1))
-    N = 2
-    ic = np.random.normal(size=(N,N))
-    ic_herm = (ic + ic.T)/2
+    diag = np.diag(np.random.dirichlet(np.ones(2),size=1).reshape(2,))
+    offdiag1, offdiag2 = np.random.normal(size=1)[0], np.random.normal(size=1)[0]
+    diag[0,1] = offdiag1
+    diag[1,0] = offdiag2
+    #N = 2
+    #ic = np.random.normal(size=(N,N))
+    ic_herm = (diag + diag.T)/2
     ic_herm = ic_herm.flatten()
+    #import pdb; pdb.set_trace()
     print('')
     print('propagating trajectory')
     exprop = MMUT_Prop(EXham, ic_herm, dt=dt, ntvec=mynumsteps)
