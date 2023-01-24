@@ -16,9 +16,9 @@ import time
 #import haiku as hk
 
 
-
-dt = 0.08268/10
-mynumsteps = 4000
+dt = 0.82680/10
+#dt = 0.82680
+mynumsteps = 2000
 #mynumsteps = 19999
 ntvec = mynumsteps
 
@@ -27,7 +27,7 @@ drc = 2
 
 m = drc
 print('reading new data')
-allden = np.load('nonlinearham.npz')
+allden = np.load('heh+_training_data_unitary.npz')
 print('done reading new data')
 
 # assume p is of size drc x drc    #
@@ -254,7 +254,7 @@ jaggadjgrad = jit(aggadjgrad)
 #jaggadjgrad = jit(aggadjgrad)
 
 # define the training set
-trnind = np.arange(0,6,dtype=np.int16)
+trnind = np.arange(0,1,dtype=np.int16)
 #trnind = np.arange(0,12,dtype=np.int16)
 trnden = np.stack(allden)[trnind]
 jtrnden = jnp.array(trnden)
@@ -282,8 +282,31 @@ ic = allden[i][0,:,:].reshape((-1))
 print('propagating trajectory:')# {}'.format(allfld[0]))
 #thetatrue = jnp.concatenate([beta1true.reshape((-1)), gamma1true.reshape((-1))])
 rng = np.random.default_rng(seed=42)
-#theta0 = 0.6*rng.standard_normal(size=numparams) - 0.3
-theta0= np.load('optaxADJMMUTtheta.npz')['trainedtheta']
+theta0 = 0.6*rng.standard_normal(size=numparams) - 0.3
+# filtinit = []
+# si = 0
+# ei = layerwidths[0]*layerwidths[1]
+# sd0 = np.sqrt(2.0 / (layerwidths[0] + layerwidths[1]))
+# filtinit.append( np.random.normal(loc=0,scale=sd0,size=ei-si) )
+# si += layerwidths[0]*layerwidths[1]
+# ei += layerwidths[1]*layerwidths[2]
+# sd1 = np.sqrt(2.0 / (layerwidths[1] + layerwidths[2]))
+# filtinit.append( np.random.normal(loc=0,scale=sd1,size=ei-si) )
+# si += layerwidths[1]*layerwidths[2]
+# ei += layerwidths[2]*layerwidths[3]
+# sd2 = np.sqrt(2.0 / (layerwidths[2] + layerwidths[3]))
+# filtinit.append( np.random.normal(loc=0,scale=sd2,size=ei-si) )
+# si += layerwidths[2]*layerwidths[3]
+# ei += layerwidths[3]*layerwidths[4]
+# sd3 = np.sqrt(2.0 / (layerwidths[3] + layerwidths[4]))
+# filtinit.append( np.random.normal(loc=0,scale=sd3,size=ei-si) )
+# filtinit = jnp.concatenate(filtinit)
+# # append zeros for biases
+# theta0 = jnp.concatenate([filtinit, np.zeros(numparams - filtinit.shape[0])])
+# print(theta0.shape[0] - numparams)
+# print(theta0.size)
+# print(numparams)
+# np.save('mmutadj_heh+_unitary_theta0.npy',theta0)
 mlprop = MMUT_Prop_HSB(theta0, ic)
 plt.plot(jnp.real(mlprop[:,0,0]),color='red')
 plt.plot(jnp.real(allden[i][:mynumsteps+1,0,0]),color='black')
@@ -293,11 +316,11 @@ plt.close()
 # WRAPPERS TO ENABLE USE OF SCIPY OPTIMIZERS
 def siobj(x):
     #hkparams = populator(params, np.array(x))
-    return np.mean(jaggloss(theta0,jtrnden))
+    return np.mean(jaggloss(x,jtrnden))
 
 def sigrad(x):
     #hkparams = populator(params, np.array(x))
-    thisgrad = jaggadjgrad(theta0,jtrnden)
+    thisgrad = jaggadjgrad(x,jtrnden)
     return np.array(jnp.mean( thisgrad, axis=0 ))
 
 # UNCOMMENT THE FOLLOWING BLOCK IF YOU WISH TO unit test the adjoint method
@@ -333,12 +356,12 @@ print(jnp.linalg.norm(jaxres - myres))
 ######################################################################
 
 #UNCOMMENT THE FOLLOWING BLOCK IF YOU WISH TO USE L-BFGS-B
-# res = scipy.optimize.minimize( siobj, 
-#                                x0 = np.array(theta0),
-#                                method = 'L-BFGS-B',
-#                                jac = sigrad,
-#                                options = {'iprint': 1, 'ftol': 1e-30, 'gtol': 1e-30} )
-# trainedtheta = res.x
+res = scipy.optimize.minimize( siobj, 
+                               x0 = np.array(theta0),
+                               method = 'L-BFGS-B',
+                               jac = sigrad,
+                               options = {'iprint': 1, 'ftol': 1e-30, 'gtol': 1e-30} )
+trainedtheta = res.x
 # ######################################################################
 
 # UNCOMMENT THE FOLLOWING BLOCK IF YOU WISH TO USE trust region with SR1 Hessian approximation
@@ -352,53 +375,53 @@ print(jnp.linalg.norm(jaxres - myres))
 ######################################################################
 
 # UNCOMMENT THIS NEXT BLOCK IF YOU WANT TO USE OPTAX
-def myobj(jx):
-    return jnp.mean(jaggloss(jx,jtrnden))
+# def myobj(jx):
+#     return jnp.mean(jaggloss(jx,jtrnden))
 
-def mygrad(jx):
-    thisgrad = jaggadjgrad(jx,jtrnden)
-    return jnp.mean( thisgrad, axis=0 )
+# def mygrad(jx):
+#     thisgrad = jaggadjgrad(jx,jtrnden)
+#     return jnp.mean( thisgrad, axis=0 )
 
-def fit(params: optax.Params, optimizer: optax.GradientTransformation, nfs, dispint, saveint) -> optax.Params:
-    opt_state = optimizer.init(params)
+# def fit(params: optax.Params, optimizer: optax.GradientTransformation, nfs, dispint, saveint) -> optax.Params:
+#     opt_state = optimizer.init(params)
 
-    def step(params, opt_state):
-        grads = mygrad(params)
-        updates, opt_state = optimizer.update(grads, opt_state, params)
-        params = optax.apply_updates(params, updates)
-        return params, opt_state
+#     def step(params, opt_state):
+#         grads = mygrad(params)
+#         updates, opt_state = optimizer.update(grads, opt_state, params)
+#         params = optax.apply_updates(params, updates)
+#         return params, opt_state
 
-    for i in range(nfs):
-        params, opt_state = step(params, opt_state)
-        if i % dispint == 0:
-            loss_value = myobj(params)
-            print(f'step {i}, loss: {loss_value}')
-        if i % saveint == 0:
-            np.savez('optaxADJMMUTtheta_2.npz',trainedtheta=params)
-            with open("optaxADJMMUTloss_2.txt",'a',encoding = 'utf-8') as f:
-                f.write(f'step {i}, loss: {loss_value}\n')
+#     for i in range(nfs):
+#         params, opt_state = step(params, opt_state)
+#         if i % dispint == 0:
+#             loss_value = myobj(params)
+#             print(f'step {i}, loss: {loss_value}')
+#         if i % saveint == 0:
+#             np.savez('optaxmmutadj_rotated.npz',trainedtheta=params)
+#             with open("optaxmmutadj_rotated.txt",'a',encoding = 'utf-8') as f:
+#                 f.write(f'step {i}, loss: {loss_value}\n')
     
-    return params
+#     return params
 
-optimizer = optax.fromage(learning_rate=1e-5)
-opt_state = optimizer.init(jnp.array(theta0))
-trainedtheta = fit(jnp.array(theta0), optimizer, 10000, 1, 10)
+# optimizer = optax.fromage(learning_rate=1e-4)
+# opt_state = optimizer.init(jnp.array(theta0))
+# trainedtheta = fit(jnp.array(theta0), optimizer, 10000, 1, 10)
 ######################################################################
 
 np.savez('trainedtheta.npz', trainedtheta=trainedtheta)
 
-print("|| theta0 - truetheta ||")
-print( jnp.linalg.norm(theta0-thetatrue) )
+#print("|| theta0 - truetheta ||")
+#print( jnp.linalg.norm(theta0-thetatrue) )
 
-print("|| trainedtheta - truetheta ||")
-print( jnp.linalg.norm(trainedtheta-thetatrue) )
+#print("|| trainedtheta - truetheta ||")
+#print( jnp.linalg.norm(trainedtheta-thetatrue) )
 
-print("jaggloss(truetheta) = " + str(siobj(thetatrue)))
-print("jaggloss(trainedtheta) = " + str(siobj(trainedtheta)))
+#print("jaggloss(truetheta) = " + str(siobj(thetatrue)))
+#print("jaggloss(trainedtheta) = " + str(siobj(trainedtheta)))
 
 i = 10
 ic = allden[i][0,:,:].reshape((-1))
-mlprop = MMUT_Prop_HSB(trainedtheta, ic, tmeoff=alltme[i], fldfrq=allfrq[i], fldamp=allamp[i])
+mlprop = MMUT_Prop_HSB(trainedtheta, ic)
 print(0.5*jnp.linalg.norm(mlprop - allden[i][:mynumsteps+1,:,:])**2)
 plt.plot(jnp.real(mlprop[:,0,0]),color='red')
 plt.plot(jnp.real(allden[i][:mynumsteps+1,0,0]),color='black')
