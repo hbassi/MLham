@@ -16,9 +16,10 @@ import time
 #import haiku as hk
 
 
-dt = 0.82680/10
-#dt = 0.82680
-mynumsteps = 2000
+#dt = 0.82680/10
+dt = 0.82680
+#can use amt of steps that constitute half a period or one period
+mynumsteps = 125
 #mynumsteps = 19999
 ntvec = mynumsteps
 
@@ -39,7 +40,7 @@ numweights = 0
 for j in range(nlayers):
     numparams += layerwidths[j]*layerwidths[j+1] + layerwidths[j+1]
     numweights += layerwidths[j]*layerwidths[j+1]
-def MLhamNN(theta,x,y): #t, fldfrq,fldamp,tmeoff,norm_direc):
+def MLhamNN(theta,x,y): 
     filt = []
     si = 0
     ei = layerwidths[0]*layerwidths[1]
@@ -67,10 +68,9 @@ def MLhamNN(theta,x,y): #t, fldfrq,fldamp,tmeoff,norm_direc):
     ei += layerwidths[4]
     bias.append( theta[si:ei] )
     inplyr = jnp.array( jnp.concatenate([x.flatten(), y.flatten()]))
-    #import pdb;pdb.set_trace()
-    h1 = jax.nn.tanh( inplyr @ filt[0] + bias[0] )
-    h2 = jax.nn.tanh( h1 @ filt[1] + bias[1] )
-    h3 = jax.nn.tanh( h2 @ filt[2] + bias[2] )
+    h1 = jax.nn.selu( inplyr @ filt[0] + bias[0] )
+    h2 = jax.nn.selu( h1 @ filt[1] + bias[1] )
+    h3 = jax.nn.selu( h2 @ filt[2] + bias[2] )
     h4 = h3 @ filt[3] + bias[3]
     hreal = h4[0:drc**2]
     himag = h4[drc**2:]
@@ -241,11 +241,11 @@ def loss(theta, thisden):
 jloss = jit(loss)
 jadjgrad = jit(adjgrad)
 
-aggloss = vmap(loss, in_axes=(None,0), out_axes=0)
-jaggloss = jit(aggloss)
+jaggloss = pmap(loss, in_axes=(None,0))
+#jaggloss = jit(aggloss)
 
-aggadjgrad = vmap(adjgrad, in_axes=(None,0), out_axes=0)
-jaggadjgrad = jit(aggadjgrad)
+jaggadjgrad = pmap(adjgrad, in_axes=(None,0))
+#jaggadjgrad = jit(aggadjgrad)
 
 #jaggloss = soft_pmap(loss, in_axes=(None,0,0,0,0,0))
 #jaggloss = jit(aggloss)
@@ -254,62 +254,21 @@ jaggadjgrad = jit(aggadjgrad)
 #jaggadjgrad = jit(aggadjgrad)
 
 # define the training set
-trnind = np.arange(0,1,dtype=np.int16)
+#trnind = np.arange(0,1,dtype=np.int16)
+trnind = np.array([89])
 #trnind = np.arange(0,12,dtype=np.int16)
 trnden = np.stack(allden)[trnind]
 jtrnden = jnp.array(trnden)
 
-# THE PURPOSE OF THE FOLLOWING BLOCK IS TO DEFINE A FUNCTION
-# THAT CAN BE USED TO EVALUATE THE OBJECTIVE FUNCTION 
-# ON A RANDOM CLOUD OF THETAS; WE THEN PICK THE BEST SUCH THETA as theta0
-
-#can omit this for code output, or set theta0 to be random numbers (now hkparams/params)
-# def jaxobj(x):
-#     return jnp.mean(aggloss(x,jtrnden,jtrntme,jtrnfrq,jtrnamp,jtrnnd))
-
-# jaxobj = vmap(jaxobj,in_axes=0,out_axes=0)
-# jjaxobj = jit(jaxobj)
-
-# rng = np.random.default_rng(seed=42)
-# numtheta = 10000
-# theta0NP = 0.6*rng.standard_normal(size=2 * drc**4 * numtheta) - 0.3
-# theta0JNP = jnp.array(theta0NP).reshape(numtheta, 2*drc**4)
-# test = jjaxobj(theta0JNP)
-# theta0 = np.array(theta0JNP[jnp.argmin(test),:])
-
-i = 0
+i = 89
 ic = allden[i][0,:,:].reshape((-1))
-print('propagating trajectory:')# {}'.format(allfld[0]))
-#thetatrue = jnp.concatenate([beta1true.reshape((-1)), gamma1true.reshape((-1))])
+print('propagating trajectory:')
 rng = np.random.default_rng(seed=42)
 theta0 = 0.6*rng.standard_normal(size=numparams) - 0.3
-# filtinit = []
-# si = 0
-# ei = layerwidths[0]*layerwidths[1]
-# sd0 = np.sqrt(2.0 / (layerwidths[0] + layerwidths[1]))
-# filtinit.append( np.random.normal(loc=0,scale=sd0,size=ei-si) )
-# si += layerwidths[0]*layerwidths[1]
-# ei += layerwidths[1]*layerwidths[2]
-# sd1 = np.sqrt(2.0 / (layerwidths[1] + layerwidths[2]))
-# filtinit.append( np.random.normal(loc=0,scale=sd1,size=ei-si) )
-# si += layerwidths[1]*layerwidths[2]
-# ei += layerwidths[2]*layerwidths[3]
-# sd2 = np.sqrt(2.0 / (layerwidths[2] + layerwidths[3]))
-# filtinit.append( np.random.normal(loc=0,scale=sd2,size=ei-si) )
-# si += layerwidths[2]*layerwidths[3]
-# ei += layerwidths[3]*layerwidths[4]
-# sd3 = np.sqrt(2.0 / (layerwidths[3] + layerwidths[4]))
-# filtinit.append( np.random.normal(loc=0,scale=sd3,size=ei-si) )
-# filtinit = jnp.concatenate(filtinit)
-# # append zeros for biases
-# theta0 = jnp.concatenate([filtinit, np.zeros(numparams - filtinit.shape[0])])
-# print(theta0.shape[0] - numparams)
-# print(theta0.size)
-# print(numparams)
-# np.save('mmutadj_heh+_unitary_theta0.npy',theta0)
 mlprop = MMUT_Prop_HSB(theta0, ic)
 plt.plot(jnp.real(mlprop[:,0,0]),color='red')
 plt.plot(jnp.real(allden[i][:mynumsteps+1,0,0]),color='black')
+plt.legend(['ML propogation', 'True'])
 plt.savefig('pretrain.pdf')
 plt.close()
 
@@ -410,70 +369,23 @@ trainedtheta = res.x
 
 np.savez('trainedtheta.npz', trainedtheta=trainedtheta)
 
-#print("|| theta0 - truetheta ||")
-#print( jnp.linalg.norm(theta0-thetatrue) )
 
-#print("|| trainedtheta - truetheta ||")
-#print( jnp.linalg.norm(trainedtheta-thetatrue) )
 
-#print("jaggloss(truetheta) = " + str(siobj(thetatrue)))
-#print("jaggloss(trainedtheta) = " + str(siobj(trainedtheta)))
-
-i = 10
+i = 45
 ic = allden[i][0,:,:].reshape((-1))
 mlprop = MMUT_Prop_HSB(trainedtheta, ic)
 print(0.5*jnp.linalg.norm(mlprop - allden[i][:mynumsteps+1,:,:])**2)
+import pdb; pdb.set_trace()
 plt.plot(jnp.real(mlprop[:,0,0]),color='red')
 plt.plot(jnp.real(allden[i][:mynumsteps+1,0,0]),color='black')
+plt.legend(['ML propogation', 'True'])
 plt.savefig('posttrain1.pdf')
 plt.close()
-
-plt.plot(jnp.real(mlprop[3900:4000,0,0]),color='red')
-plt.plot(jnp.real(allden[i][3900:4000,0,0]),color='black')
+#proceed for a long time after training
+#chcek all components in all plots 
+plt.plot(jnp.real(mlprop[300:400,0,0]),color='red')
+plt.plot(jnp.real(allden[i][300:400,0,0]),color='black')
+plt.legend(['ML propogation', 'True'])
 plt.savefig('posttrain2.pdf')
 plt.close()
-
-def MMUT_Save_Ham(hkparams, initial_density, tmeoff=1, fldfrq=1, fldamp=1, norm_direc=jnp.array([0.0,0.0,1.0])):
-    tvec = dt*jnp.arange(ntvec)
-    P0 = initial_density.reshape((drc, drc))
-    propagated_dens = [P0]
-    H0 = MLham.apply(hkparams,P0.real,P0.imag)
-    H0 = H0[0] + 1j*H0[1]
-    propagated_hams = [H0]
-    evals, evecs = jnp.linalg.eigh(H0)
-    U0 = evecs @ jnp.diag(jnp.exp(-1j*dt*evals)) @ evecs.conj().T
-    P1 = U0 @ P0 @ U0.conj().T
-    propagated_dens.append( P1 )
-    def bodyfun(i, intup):
-        dl, hl = intup
-        P0 = dl[i, :, :]
-        P1 = dl[i+1, :, :]
-        H1 = MLham.apply(hkparams,P1.real,P1.imag)
-        H1 = H1[0] + 1j*H1[1]
-        evals, evecs = jnp.linalg.eigh(H1)
-        U1 = evecs @ jnp.diag(jnp.exp(-2j*dt*evals)) @ evecs.conj().T
-        P2 = U1 @ P0 @ U1.conj().T
-        return (dl.at[i+2].set( P2 ), hl.at[i+1].set( H1 ))
-    
-    alldens = jnp.concatenate([jnp.stack(propagated_dens), jnp.zeros((ntvec-1, drc, drc))], axis=0)
-    allhams = jnp.concatenate([jnp.stack(propagated_hams), jnp.zeros((ntvec-1, drc, drc))], axis=0)
-    fdh = lax.fori_loop(0, ntvec-1, bodyfun, (alldens, allhams))
-    
-    return fdh
-
-i = 99
-ic = allden[i][0,:,:].reshape((-1))
-mynumsteps = 4000
-mydenham = MMUT_Save_Ham(trainedtheta, ic, tmeoff=alltme[i], fldfrq=allfrq[i], fldamp=allamp[i])
-trdenham = MMUT_Save_Ham(thetatrue, ic, tmeoff=alltme[i], fldfrq=allfrq[i], fldamp=allamp[i])
-
-print("Hamiltonian errors")
-print( jnp.mean(jnp.square(jnp.abs(mydenham[1][:,0,1] - trdenham[1][:,0,1]))) )
-print( jnp.mean(jnp.square(jnp.abs(mydenham[1][:,1,0] - trdenham[1][:,1,0]))) )
-print( jnp.mean(jnp.square(jnp.abs((mydenham[1][:,1,1] - mydenham[1][:,0,0]) - (trdenham[1][:,1,1] - trdenham[1][:,0,0])))) )
-
-mycom = jnp.einsum('aij,ajk->aik',mydenham[1],mydenham[0][:-1,:,:]) - jnp.einsum('aij,ajk->aik',mydenham[0][:-1,:,:],mydenham[1])
-trcom = jnp.einsum('aij,ajk->aik',trdenham[1],trdenham[0][:-1,:,:]) - jnp.einsum('aij,ajk->aik',trdenham[0][:-1,:,:],trdenham[1])
-print("Commutator error: ")
-print(jnp.mean(jnp.square(jnp.abs(mycom - trcom))))
 
